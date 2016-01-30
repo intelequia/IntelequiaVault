@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+// SETTINGS
+//============/
+
+// Activar/desactivar las características que se usarán en el skin
+// Aquí se configura la inclusión de los ficheros en la compilación de SASS
+
+// Components
+$include-accordion: true;
+$include-alerts: true;
+$include-buttons: true;
+$include-forms: true;
+$include-animations: true;
+
+// Layout
+$include-grid: true;
+
+//===========================================================================================/
+
+
+// PATH
+//========/
+$imageDir: "../img"; // Use: background-image:url("#{$image-dir}/image.jpg");
+$fontDir: "../fonts"; // Use: url("#{$fontDir}/font.woff");
+
+
+// FONT FACES
+//==============/
+$openSansFont: "Open Sans", Segoe UI Light, Arial, Helvetica, Sans-Serif;
+
+$baseFont: $openSansFont;
+$baseFontWeight: 300;
+$baseHeadingFont: $openSansFont;
+$baseHeadingFontWeight: 300;
+$altHeadingFont: $openSansFont;
+$altHeadingFontWeight: 300;
+
+// TAMAÑOS
+//===========/
+// Tamaño de fuente base
+$baseFontSize: 16px;
+$baseLineHeight: normal;
+
+//	Las variables de tamaño las definimos en un MAP:
+//	.selector { font-size: .8rem}
+//	También se puede asignar tamaños con la función fs():
+//	.selector { font-size: fs(x-small);}
+
+$fontsize-vars: (
+	"tiny": .5,
+	"small": .8,
+	"medium": .9,
+	"normal": 1,
+	"large": 1.5,
+	"huge": 2
+);
+
+
+// COLORES
+// ==========/
+// Colores ISS
+$issLightBlue: #1a9ace;
+$issDarkBlue: #306699;
+$issGreen: #57ab29;
+$issOrange: #f2983b;
+$issRed: #cb3234;
+$issPurple: #981066;
+
+// Color Palette
+$primaryColor: #4C4556;
+$secondaryColor: #872642;
+$tertiaryColor: #F6C026;
+$quaternaryColor: #A0D3F9;
+
+$red: #E35555;
+$pink: #c84b75;
+$orange: #e38755;
+$yellow: #e3bc55;
+$green: #1CB254;
+$blue: #3b7290;
+$purple: #61449b;
+$lightBlue: #54C1D8;
+
+$accentColor: $primaryColor;
+$accentColorLight: lighten($accentColor, 15);
+$accentColorDark: darken($accentColor, 15);
+
+
+// Escala de grises
+$grey: #c0c0c0;
+$lightGrey: #e3e3e3;
+$darkGrey: #4e4e4e;
+$black: #222222;
+$white: #fafafa;
+$pureBlack: #000000;
+$pureWhite: #ffffff;
+
+// Enlaces
+$linkColor: $accentColor;
+$linkColorHover: $accentColorDark;
+$linkColorVisited: $accentColor;
+$linkColorFocus: $accentColorDark;
+
+// Colores sociales corporativos(http://brandcolors.net)
+$facebook: #3b5998;
+$twitter: #55acee;
+$googleplus: #dd4b39;
+$linkedin: #0077b5;
+$youtube: #cd201f;
+$skype: #00aff0;
+$spotify: #2ebd59;
+$pinterest: #cc2127;
+$instagram: #4E433C;
+
+
+// Site
+// Elementos generales para el site
+$backgroundColor: $white;
+$textColor: $darkGrey;
+$radius: 4px;
+$boxRadius: 1em;
+$gutterWidth: 15px;
+
+// Sidr colors
+$sidrBg: $lightGrey;
+$sidrHeaderBg: $tertiaryColor;
+$sidrHeaderColor: $primaryColor;
+
+

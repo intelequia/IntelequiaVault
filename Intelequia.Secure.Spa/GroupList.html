@@ -1,0 +1,157 @@
+﻿[JavaScript:{ jsname: "JQuery" }]
+[JavaScript:{ jsname: "Knockout" }]
+[JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Accordion.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/GroupList.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Common.js"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/font-awesome.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/module.css"}]
+
+<div id="iss_IntelequiaSecure_Groups_[ModuleContext:ModuleId]" class="container-fluid">
+    <div class="heading">
+        <h3 class="title">
+            <span class="icon">
+                <em class="fa fa-list"></em>
+            </span>
+            <span>[Resx:{key:"Categories"}]</span>
+        </h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <div class="input-group">
+                    <select class="form-control" title="[Resx:{key:'OrderBy.Help'}]" data-bind="value: sortField, event: {change: sort}">
+                        <option value="ResourceName">[Resx:{key:'CategoryName'}]</option>
+                        <option value="Cd">[Resx:{key:'Cd'}]</option>
+                        <option value="Cu">[Resx:{key:'Cu'}]</option>
+                        <option value="Md">[Resx:{key:'Md'}]</option>
+                        <option value="Mu">[Resx:{key:'Mu'}]</option>
+                    </select>
+                    <a href="#" class="btn btn-secondary" data-bind="click: sort, attr: { href: '#' + sortField() }" title="[Resx:{key:'OrderBy'}]">
+                        <em class="fa" data-bind="css: {'fa-sort-alpha-asc': sortOrder() == 'ASC', 'fa-sort-alpha-desc': sortOrder() == 'DESC'}"></em>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" maxlength="50" placeholder="[Resx:{key:'FilterBy'}]"data-bind="value: searchTags" />
+
+                    <a href="#" class="btn btn-primary" data-bind="click: search" title="[Resx:{key:'Filter'}]">
+                        <em class="fa fa-filter"></em>
+                    </a>
+                    <a href="#" class="btn btn-secondary" data-bind="click: clean" title="[Resx:{key:'Clean'}]">
+                        <em class="fa fa-eraser"></em>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 text-right" data-bind="if: isAdministrator">
+            <a href="#" data-bind="attr:{href:addGroupUrl}, visible: isAdministrator" style="display:none;" title="[Resx:{key:'AddCategory.Help'}]" class="btn btn-icon add-record">
+                <em class="fa fa-plus"></em> [Resx:{key:'AddCategory'}]
+            </a>
+        </div>
+    </div>
+
+    <div style="display: none !important;" data-bind="visible: groupList().length < 1">
+        <div class="alert alert-info">
+            <span>[Resx:{key:"NoResources"}]</span>
+        </div>
+    </div>
+
+    <div id="groupsPanel" class="groups-panel" data-bind="visible: groupList().length > 0">
+        <div id="accordionGroups" class="accordion">
+            <!-- ko foreach: groupList  -->
+            <div class="accordion-panel group-panel">
+                <div class="group-heading">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-9" title="[Resx:{key:'ShowResources'}]">
+                                <a href="#" class="group-title" data-toggle="accordion" data-root="#accordionGroups" aria-expanded="false" data-bind="attr: {href: '#pnlGroup_' + resourceGroupId()}, click: getResources">
+                                    <span class="group-icon">
+                                        <em class="fa fa-book"></em>
+                                    </span>
+                                    <span data-bind="text: resourceName"></span>
+                                    <em class="hover-arrow fa fa-arrow-circle-right"></em>
+                                </a>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3 text-right hidden-xs">
+                                <a href="#SendMail" class="group-action sendmail" data-bind="click: sendMail, css: {'sendmail-visible': hasSelectedResources}" title="[Resx:{key:'SendMail'}]">
+                                    <em class="fa fa-envelope"></em>
+                                </a>
+                                <a href="#" class="group-action" data-bind="attr:{href:addResourceUrl}" title="[Resx:{key:'AddResource'}]">
+                                    <em class="fa fa-plus"></em>
+                                </a>
+                                <a href="#" class="group-action" data-bind="attr:{href:editGroupUrl}" title="[Resx:{key:'EditCategory'}]">
+                                    <em class="fa fa-pencil"></em>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="" class="accordion-collapse" data-bind="attr: { id: 'pnlGroup_' + resourceGroupId() }">
+                    
+                    <div class="group-actions-mobile text-right visible-xs">
+                        <a href="#SendMail" class="group-action sendmail" data-bind="click: sendMail, css: {'sendmail-visible': hasSelectedResources}" title="[Resx:{key:'SendMail'}]">
+                            <em class="fa fa-envelope"></em>
+                        </a>
+                        <a href="#" class="group-action" data-bind="attr:{href:addResourceUrl}" title="[Resx:{key:'AddResource'}]">
+                            <em class="fa fa-plus"></em>
+                        </a>
+                        <a href="#" class="group-action" data-bind="attr:{href:editGroupUrl}" title="[Resx:{key:'EditCategory'}]">
+                            <em class="fa fa-pencil"></em>
+                        </a>
+                    </div>
+
+                    <div class="group-body">
+                        <!-- ko foreach: resourceList  -->
+                        <div id="" class="key-panel" data-bind="attr: { id: 'resource_' + resourceId() }">
+                            <div class="resource-heading">
+                                <span class="resource-icon">
+                                    <em class="fa fa-key"></em>
+                                </span>
+                                <span class="resource-name" data-bind="text: resourceKey"></span>
+                                <a href="#" class="resource-action" data-bind="click: $parent.selectResource" title="[Resx:{key:'SelectToSend'}]">
+                                    <em class="fa fa-square-o"></em>
+                                </a>
+                                <a href="#" class="resource-action" data-bind="attr:{href:editResourceUrl}" title="[Resx:{key:'EditResource'}]">
+                                    <em class="fa fa-pencil"></em>
+                                </a>
+                                <a href="#" class="resource-action" data-bind="click: viewResource, visible: !isResourceVisible()" title="[Resx:{key:'ShowResource'}]">
+                                    <em class="fa fa-eye"></em>
+                                </a>
+                                <a href="#" class="resource-action" data-bind="click: hideResource, visible: isResourceVisible()" title="[Resx:{key:'HideResource'}]">
+                                    <em class="fa fa-eye-slash"></em>
+                                </a>
+                            </div>
+                            <div data-bind="html: resourceValue, css: resourceValueCss"></div>
+                        </div>
+                        <!-- /ko-->
+                    </div>
+                </div>
+                
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    jQuery(function ($) {
+        var moduleId = parseInt("[ModuleContext:ModuleId]");
+        var localizedSettings = {
+            ErrorSelectMessage: "[Resx:{key:'ErrorSelectMessage'}]"
+        };
+
+        var viewmodel = new intelequiaSecure.GroupListViewModel(moduleId, localizedSettings);
+        viewmodel.init();
+
+        ko.applyBindings(viewmodel, $("#iss_IntelequiaSecure_GroupList_" + moduleId)[0]);
+    });
+</script>

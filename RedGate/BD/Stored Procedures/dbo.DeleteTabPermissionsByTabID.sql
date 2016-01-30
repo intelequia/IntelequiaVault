@@ -1,0 +1,12 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[DeleteTabPermissionsByTabID]
+	@TabID int
+AS
+
+DELETE FROM dbo.TabPermission
+WHERE
+	[TabID] = @TabID
+GO

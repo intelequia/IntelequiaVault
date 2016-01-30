@@ -1,0 +1,149 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Message]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Message]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Permission]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Permission]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Resource]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Resource]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Group]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Group]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Group]
+	(
+	[ResourceGroupId] [uniqueidentifier] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Group_ResourceGroupId] DEFAULT (newid()),
+	[ResourceName] [nvarchar] (max) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[PortalId] [int] NOT NULL,
+	[Cd] [datetime] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Group_Cd] DEFAULT (getdate()),
+	[Cu] [int] NOT NULL,
+	[Md] [datetime] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Group_Md] DEFAULT (getdate()),
+	[Mu] [int] NOT NULL
+	)
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Group] ADD CONSTRAINT [PK_iss_IntelequiaSecure_Group] PRIMARY KEY CLUSTERED  ([ResourceGroupId])
+
+CREATE TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Permission]
+	(
+	[PermissionId] [int] NOT NULL IDENTITY(1, 1),
+	[ResourceGroupId] [uniqueidentifier] NOT NULL,
+	[UserId] [int] NULL,
+	[RolId] [int] NULL,
+	[ReadPermission] [bit] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Permission_ReadPermission] DEFAULT ((0)),
+	[WritePermission] [bit] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Permission_WritePermission] DEFAULT ((0)),
+	[Cd] [datetime] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Permission_Cd] DEFAULT (getdate()),
+	[Cu] [int] NOT NULL,
+	[Md] [datetime] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Permission_Md] DEFAULT (getdate()),
+	[Mu] [int] NOT NULL
+	)
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Permission] ADD CONSTRAINT [PK_iss_IntelequiaSecure_Permission] PRIMARY KEY CLUSTERED  ([PermissionId])
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Resource]
+	(
+	[ResourceId] [uniqueidentifier] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Resource_ResourceId] DEFAULT (newid()),
+	[ResourceGroupId] [uniqueidentifier] NOT NULL,
+	[ResourceKey] [nvarchar] (max) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[ResourceValue] [nvarchar] (max) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[Cd] [datetime] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Resource_Cd] DEFAULT (getdate()),
+	[Cu] [int] NOT NULL,
+	[Md] [datetime] NOT NULL CONSTRAINT [DF_iss_IntelequiaSecure_Resource_Md] DEFAULT (getdate()),
+	[Mu] [int] NOT NULL
+	)
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Resource] ADD CONSTRAINT [PK_iss_IntelequiaSecure_Resource] PRIMARY KEY CLUSTERED  ([ResourceId])
+GO
+
+
+CREATE TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Message](
+	[MessageId] [uniqueidentifier] NOT NULL DEFAULT (newid()),
+	[MessageFrom] [nvarchar](max) NOT NULL,
+	[MessageTo] [nvarchar](max) NULL,
+	[MessageCc] [nvarchar](max) NULL,
+	[MessageCco] [nvarchar](max) NULL,
+	[Subject] [nvarchar](max) NOT NULL,
+	[Body] [nvarchar](max) NOT NULL,
+	[ExpireDate] [datetime] NOT NULL,
+	[Cd] [datetime] NOT NULL,
+	[Cu] [int] NOT NULL,
+	[Md] [datetime] NOT NULL,
+	[Mu] [int] NOT NULL,
+ CONSTRAINT [PK_iss_IntelequiaSecure_Message_1] PRIMARY KEY CLUSTERED 
+(
+	[MessageId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Message] ADD  CONSTRAINT [DF_iss_IntelequiaSecure_Message_Cd]  DEFAULT (getdate()) FOR [Cd]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Message] ADD  CONSTRAINT [DF_iss_IntelequiaSecure_Message_Md]  DEFAULT (getdate()) FOR [Md]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Permission] ADD CONSTRAINT [FK_iss_IntelequiaSecure_Permission_iss_IntelequiaSecure_Group] FOREIGN KEY ([ResourceGroupId]) REFERENCES {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Group] ([ResourceGroupId]) ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Permission] ADD CONSTRAINT [FK_iss_IntelequiaSecure_Permission_Users] FOREIGN KEY ([UserId]) REFERENCES {databaseOwner}{objectQualifier}[Users] ([UserID]) ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Permission] ADD CONSTRAINT [FK_iss_IntelequiaSecure_Permission_Roles] FOREIGN KEY ([RolId]) REFERENCES {databaseOwner}{objectQualifier}[Roles] ([RoleID]) ON DELETE CASCADE
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Resource] ADD CONSTRAINT [FK_iss_IntelequiaSecure_Resource_iss_IntelequiaSecure_Group] FOREIGN KEY ([ResourceGroupId]) REFERENCES {databaseOwner}{objectQualifier}[iss_IntelequiaSecure_Group] ([ResourceGroupId]) ON DELETE CASCADE
+GO
+
+
+IF NOT EXISTS (SELECT * FROM {databaseOwner}[{objectQualifier}Schedule] WHERE TypeFullName = 'Intelequia.Secure.Spa.Task.DeleteMessages,Intelequia.Secure.Spa')
+BEGIN
+	INSERT INTO {databaseOwner}[{objectQualifier}Schedule]
+           ([TypeFullName]
+           ,[TimeLapse]
+           ,[TimeLapseMeasurement]
+           ,[RetryTimeLapse]
+           ,[RetryTimeLapseMeasurement]
+           ,[RetainHistoryNum]
+           ,[AttachToEvent]
+           ,[CatchUpEnabled]
+           ,[Enabled]
+           ,[ObjectDependencies]
+           ,[Servers]
+           ,[CreatedByUserID]
+           ,[CreatedOnDate]
+           ,[LastModifiedByUserID]
+           ,[LastModifiedOnDate]
+           ,[FriendlyName])
+     VALUES
+           ('Intelequia.Secure.Spa.Task.DeleteMessages,Intelequia.Secure.Spa',
+		   5, 'm',
+		   1, 'm',
+		   5,
+		   '', 'False', 'True',
+		   '', NULL,
+		   NULL, NULL,
+		   NULL, NULL,
+		   'Intelequia Secure DeleteMessages')
+END
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

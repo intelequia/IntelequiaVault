@@ -1,0 +1,13 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetFolderByFolderID]
+	@FolderID int
+AS
+BEGIN
+	SELECT *
+	FROM dbo.[Folders]
+	WHERE FolderID = @FolderID
+END
+GO

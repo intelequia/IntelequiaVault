@@ -1,0 +1,157 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="Intelequia.Secure.Spa" type="Module" version="01.00.00">
+      <friendlyName>Intelequia Vault</friendlyName>
+      <description>Intelequia Vault</description>
+      <iconFile>~/DesktopModules/Intelequia/Secure/Img/iconExtension.gif</iconFile>
+      <owner>
+        <name>Intelequia</name>
+        <organization>Intelequia Software Solutions</organization>
+        <url>https://intelequia.com</url>
+        <email>support@intelequia.com</email>
+      </owner>
+      <license src="License.txt"></license>
+      <azureCompatible>true</azureCompatible>
+      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">08.00.00</dependency>
+      </dependencies>
+
+      <components>
+        <component type="Script">
+          <scripts>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="UnInstall">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+          </scripts>
+        </component>
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>Intelequia.Secure.Spa</moduleName>
+            <foldername>Intelequia/Secure</foldername>
+            <businessControllerClass>Intelequia.Secure.Spa.Components.FeatureController,Intelequia.Secure.Spa</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="Portable" />
+              <supportedFeature type="Searchable" />
+              <supportedFeature type="Upgradeable" />
+            </supportedFeatures>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <controlKey />
+                <friendlyName>Group</friendlyName>
+                <defaultCacheTime>-1</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey></controlKey>
+                    <controlSrc>DesktopModules/Intelequia/Secure/GroupList.html</controlSrc>
+                    <controlTitle>Group List</controlTitle>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlType>View</controlType>
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                    <defaultCacheTime>-1</defaultCacheTime>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+
+                  <moduleControl>
+                    <controlKey>GroupEdit</controlKey>
+                    <controlSrc>DesktopModules/Intelequia/Secure/GroupEdit.html</controlSrc>
+                    <controlTitle>Group Edit</controlTitle>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlType>View</controlType>
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>1</viewOrder>
+                    <defaultCacheTime>-1</defaultCacheTime>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+
+                  <moduleControl>
+                    <controlKey>ResourceEdit</controlKey>
+                    <controlSrc>DesktopModules/Intelequia/Secure/Resource.html</controlSrc>
+                    <controlTitle>Resource Edit</controlTitle>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlType>View</controlType>
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>2</viewOrder>
+                    <defaultCacheTime>-1</defaultCacheTime>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+
+                  <moduleControl>
+                    <controlKey>SendMessage</controlKey>
+                    <controlSrc>DesktopModules/Intelequia/Secure/SendMessage.html</controlSrc>
+                    <controlTitle>Send Message</controlTitle>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlType>View</controlType>
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>3</viewOrder>
+                    <defaultCacheTime>-1</defaultCacheTime>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+
+                  <moduleControl>
+                    <controlKey>ViewMessage</controlKey>
+                    <controlSrc>DesktopModules/Intelequia/Secure/ViewMessage.html</controlSrc>
+                    <controlTitle>View Message</controlTitle>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlType>View</controlType>
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>4</viewOrder>
+                    <defaultCacheTime>-1</defaultCacheTime>
+                    <iconFile />
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+
+          <eventMessage>
+            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor,DotNetNuke</processorType>
+            <processorCommand>UpgradeModule</processorCommand>
+            <attributes>
+              <businessControllerClass>Intelequia.Secure.Spa.Components.FeatureController,Intelequia.Secure.Spa</businessControllerClass>
+              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
+            </attributes>
+          </eventMessage>
+        </component>
+
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>Intelequia.Secure.Spa.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Intelequia.Secure.Data.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/Intelequia/Secure</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

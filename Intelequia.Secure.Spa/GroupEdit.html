@@ -1,0 +1,224 @@
+﻿[JavaScript:{ jsname: "JQuery" }]
+[JavaScript:{ jsname: "Knockout" }]
+[JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/knockout.validation.min.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/GroupEdit.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Common.js"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/font-awesome.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/module.css"}]
+
+<div id="iss_IntelequiaSecure_GroupEdit_[ModuleContext:ModuleId]" class="container-fluid">
+
+    <div class="heading" data-bind="with: group">
+        <h3 class="title">
+            <span class="icon">
+                <em class="fa fa-book"></em>
+            </span>
+            <!-- ko if: resourceName() -->
+            <span data-bind="text: resourceName"></span>
+            <!-- /ko -->
+            <!-- ko if: !resourceName() -->
+            <span>[Resx:{key:"NewCategory"}]</span>
+            <!-- /ko -->
+        </h3>
+    </div>
+
+    <div class="row" data-bind="with: group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>[Resx:{key:"CategoryName"}]:</label>
+                <input type="text" class="form-control required" maxlength="150" data-bind="value: resourceName, validationElement: resourceName" title="[Resx:{key:'CategoryName.Help'}]" placeholder="[Resx:{key:'CategoryName.Help'}]" />
+
+                <div data-bind="validationMessage: resourceName" class="text-alert text-danger" style="display: none;">
+                    <span data-bind="validationMessage: resourceName"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ko if: editMode() -->
+    <div class="role-permissions">
+        <div class="heading">
+            <h4 class="title">
+                <span class="icon">
+                    <em class="fa fa-shield"></em>
+                </span>
+                <span>[Resx:{key:"Roles"}]</span>
+            </h4>
+        </div>
+
+        <div class="row hidden-xs hidden-sm text-center">
+            <div class="col-sm-2 col-sm-offset-6">
+                <span>[Resx:{key:"Read"}]</span>
+            </div>
+            <div class="col-sm-2">
+                <span>[Resx:{key:"Write"}]</span>
+            </div>
+        </div>
+
+        <!-- ko foreach: rolePermissionList  -->
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="role-name" data-bind="text: roleName"></span>
+            </div>
+            <div class="col-xs-6 col-sm-2 text-center permission">
+                <input type="checkbox" data-bind="checked: readPermission, click: savePermission, enable: !(roleName() == 'Administrators' && $parent.isAdministrator)" />
+                <span class="visible-xs visible-sm permission-type">[Resx:{key:"Read"}]</span>
+            </div>
+            <div class="col-xs-6 col-sm-2 text-center permission">
+                <input type="checkbox" data-bind="checked: writePermission, click: savePermission, enable: !(roleName() == 'Administrators' && $parent.isAdministrator)" />
+                <span class="visible-xs visible-sm permission-type">[Resx:{key:"Write"}]</span>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="user-permissions">
+        <div class="heading">
+            <h4 class="title">
+                <span class="icon">
+                    <em class="fa fa-users"></em>
+                </span>
+                <span>[Resx:{key:"Users"}]</span>
+                <span class="heading-action" title="[Resx:{key:'AddUser'}]" data-bind="click: addUserConfirm, visible: !addUserVisible()">
+                    <em class=" fa fa-plus"></em>
+                </span>
+            </h4>
+        </div>
+
+        <!-- ko if:userPermissionList().length > 0 -->
+        <div class="row hidden-xs hidden-sm text-center">
+            <div class="col-sm-2 col-sm-offset-6">
+                <span>[Resx:{key:"Read"}]</span>
+            </div>
+            <div class="col-sm-2">
+                <span>[Resx:{key:"Write"}]</span>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko foreach: userPermissionList -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <a href="#" class="btn btn-inverse" data-bind="click: deletePermission">
+                    <em class="fa fa-trash-o"></em>
+                </a>
+                <span class="user-displayname" data-bind="text: userDisplayName"></span>
+            </div>
+            <div class="col-xs-6 col-sm-2 text-center permission">
+                <input type="checkbox" data-bind="checked: readPermission, click: savePermission" />
+                <span class="visible-xs visible-sm permission-type">[Resx:{key:"Read"}]</span>
+            </div>
+            <div class="col-xs-6 col-sm-2 text-center permission">
+                <input type="checkbox" data-bind="checked: writePermission, click: savePermission" />
+                <span class="visible-xs visible-sm permission-type">[Resx:{key:"Write"}]</span>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <!-- ko if:addUserVisible -->
+    <div class="new-user">
+        <div class="alert alert-warning text-left">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" maxlength="150" placeholder="[Resx:{key:'User.Help'}]" data-bind="value: newUserUserName, validationElement: newUserUserName" />
+                            <a href="#" class="btn" data-bind="click: checkUser" title="[Resx:{key:'CheckUser'}]">
+                                <em class="fa fa-user"></em>
+                            </a>
+
+                            <!-- ko if: userFound() == true -->
+                            <span class="btn btn-success" title="[Resx:{key:'UserFound'}]">
+                                <em class="fa fa-check"></em>
+                            </span>
+                            <!-- /ko -->
+                            <!-- ko if: userFound() == false -->
+                            <span class="btn btn-danger" title="[Resx:{key:'UserNotFound'}]">
+                                <em class="fa fa-exclamation"></em>
+                            </span>
+                            <!-- /ko -->
+                        </div>
+                        <div data-bind="validationMessage: newUserUserName" class="text-alert text-danger" style="display: none;">
+                            <span data-bind="validationMessage: newUserUserName"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-2">
+                    <div class="form-group text-center permission">
+                        <label class="hidden-xs">[Resx:{key:"Read"}]</label>
+                        <input type="checkbox" class="form-control" data-bind="checked: newUserReadPermission" />
+                        <span class="visible-xs permission-type">[Resx:{key:"Read"}]</span>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-2">
+                    <div class="form-group text-center permission">
+                        <label class="hidden-xs">[Resx:{key:"Write"}]</label>
+                        <input type="checkbox" class="form-control" data-bind="checked: newUserWritePermission" />
+                        <span class="visible-xs permission-type">[Resx:{key:"Write"}]</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <a href="#" class="btn btn-icon" data-bind="click: addUser">[Resx:{key:"Accept"}]</a>
+                <a href="#" class="btn btn-icon btn-secondary" data-bind="click: addUserCancel">[Resx:{key:"CancelAddUser"}]</a>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <div class="text-right" data-bind="with: group">
+        
+        <a href="#" class="btn btn-icon btn-tertiary" data-bind="attr:{href: $parent.postBackUrl}">
+            <em class=" fa fa-arrow-left"></em>
+            <span>[Resx:{key:'Back'}]</span>
+        </a>
+        <a href="#" class="btn btn-icon btn-secondary" title="[Resx:{key:'DeleteCategory.Help'}]" data-bind="click: deleteResourceGroupConfirm, visible: $parent.editMode">
+            <em class=" fa fa-trash"></em>
+            <span>[Resx:{key:'Delete'}]</span>
+        </a>
+        <a href="#" class="btn" data-bind="click: saveResourceGroup" title="[Resx:{key:'Save'}]">
+            <em class="fa fa-save"></em>
+            <span>[Resx:{key:'Save'}]</span>
+        </a>
+        
+    </div>
+
+    <!-- ko with: group -->
+    <!-- ko if: deleteResourceGroupVisible -->
+    <div class="delete-group">
+        <div class="alert alert-warning text-left">
+            <p>[Resx:{key:"ConfirmeDeteleResourceGroup"}]</p>
+            <br />
+            <div class="text-right">
+                <a href="#" class="btn btn-icon" data-bind="click: deleteResourceGroup">[Resx:{key:"Yes"}]</a>
+                <a href="#" class="btn btn-icon btn-secondary" data-bind="click: deleteResourceGroupCancel">[Resx:{key:"No"}]</a>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>
+
+<script language="javascript" type="text/javascript">
+    jQuery(function ($) {
+        var moduleId = parseInt("[ModuleContext:ModuleId]");
+
+        var localizedSettings = {
+            RequiredResourceGroupName: "[Resx:{key:'RequiredCategoryName'}]",
+            RequiredNewUserUserName: "[Resx:{key:'RequiredNewUserUserName'}]",
+            ErrorSavePermission: "[Resx:{key:'ErrorSavePermission'}]",
+            RequiredNewUserUserName: "[Resx:{key:'RequiredNewUserUserName'}]",
+            ErrorDeletePermission: "[Resx:{key:'ErrorDeletePermission'}]"
+        };
+
+        var viewmodel = new intelequiaSecure.EditViewModel(moduleId, localizedSettings);
+        viewmodel.init(viewmodel);
+
+        ko.applyBindings(viewmodel, $("#iss_IntelequiaSecure_GroupEdit_" + moduleId)[0]);
+    });
+</script>

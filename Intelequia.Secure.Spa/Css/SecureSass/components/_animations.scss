@@ -1,0 +1,27 @@
+
+@if $include-animations == true {
+
+	// Blink animation
+	@keyframes blink-bg {
+		50% {
+			background-color: $tertiaryColor;
+			color: $primaryColor;
+		}
+		100% {
+			background-color: transparent;
+			color: $textColor;
+		}
+	}
+
+	@-webkit-keyframes blink-bg {
+		50% {
+			background-color: $tertiaryColor;
+			color: $primaryColor;
+		}
+		100% {
+			background-color: transparent;
+			color: $textColor;
+		}
+	}
+
+}

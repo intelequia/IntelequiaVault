@@ -1,0 +1,10 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetServers] 
+AS
+	SELECT *
+	FROM dbo.WebServers
+	ORDER BY ServerName, IISAppName
+GO

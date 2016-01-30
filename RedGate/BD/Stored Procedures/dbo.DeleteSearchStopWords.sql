@@ -1,0 +1,11 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[DeleteSearchStopWords]
+	@StopWordsID int
+AS
+BEGIN	
+	DELETE FROM dbo.SearchStopWords WHERE StopWordsID = @StopWordsID
+END
+GO

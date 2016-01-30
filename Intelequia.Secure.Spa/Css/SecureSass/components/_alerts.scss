@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+@if $include-alerts == true {
+	.alert {
+		padding: 1em;
+		margin: 1em 0;
+		border: 1px solid transparent;
+		border-radius: 0;
+
+		&.alert-danger {
+			background-color: $red;
+			border-color: darken($red, 20);
+			color: $white;
+		}
+
+		&.alert-warning {
+			background-color: $yellow;
+			border-color: darken($yellow, 20);
+			color: $textColor;
+		}
+
+		&.alert-info {
+			background-color: $blue;
+			border-color: darken($blue, 20);
+			color: $white;
+		}
+
+		&.alert-success { 
+			background-color: $green;
+			border-color: darken($green, 20);
+			color: $white;
+		}
+
+		h4 {
+			  margin-top: 0;
+			  color: inherit;
+			}
+
+		& > p, & > ul {
+			margin-bottom: 0;
+		}
+
+		& > p + p {
+			margin-top: 5px;
+		}
+	}
+
+	.text-alert {
+		padding: 0.3em 1em;
+		margin: 0;
+
+		&.text-danger {
+			color: $red;
+		}
+
+		&.text-warning {
+			color: $yellow;
+		}
+
+		&.text-info {
+			color: $blue;
+		}
+
+		&.text-success { 
+			color: $green;
+		}
+	}
+}

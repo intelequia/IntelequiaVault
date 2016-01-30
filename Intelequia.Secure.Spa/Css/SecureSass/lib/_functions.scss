@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+//FUNCTIONS
+//============/
+
+// Función para mantener el tamaño de fuente consistente
+// .selector { font-size: fs(x-small); }
+@function fs($font-size) {
+  @return map-get($fontsize-vars, $font-size) * 1em;
+}
+
+@function fsr($font-size) {
+  @return map-get($fontsize-vars, $font-size) * 1rem;
+}
+
+// Generate scaled font size
+@function generate-font-size($label, $breakpoint) {
+	$label-position: index($scale-labels, $label);
+	$breakpoint-base-font-size: map-get(map-get($responsive-typography, $breakpoint), base-font-size);
+	$breakpoint-type-scale: map-get(map-get($responsive-typography, $breakpoint), type-scale);
+	$font-size: $breakpoint-base-font-size;
+
+	@for $i from 1 to $label-position {
+		$font-size: $font-size * $breakpoint-type-scale;
+	}
+	
+	@return $font-size;
+}

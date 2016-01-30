@@ -1,0 +1,9 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetVocabularies] 
+AS
+	SELECT *
+		FROM dbo.Taxonomy_Vocabularies
+GO

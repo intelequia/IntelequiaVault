@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+@if $include-forms == true {
+
+	// FORM ELEMENTS
+	//=================/
+	input {
+		display: inline-block;
+		width: auto;
+		height: auto;
+		line-height: normal;
+	}
+
+	input[type="text"], input[type="email"], input[type="search"], input[type="password"], input[type="date"], input[type="time"], select, textarea {
+		margin: 0;
+		padding: 6px;
+		font-size: 1em;
+		line-height: normal;
+		color: $textColor;
+		background-color: $white;
+		border: 1px solid $primaryColor;
+		@include border-radius(0);
+		@include box-shadow(none);
+
+		&.required {
+			border-left: 5px solid $red;
+		}
+	}
+
+	input[type="date"], input[type="time"] {
+		padding: 3px;
+
+		@media screen and (max-width: 768px) {
+			padding: 4px;
+		}
+	}
+
+	input[type="checkbox"], input[type="radio"] {
+		padding: 0;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	select.form-control {
+		padding: 5px 6px;
+	}
+
+	textarea.form-control {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.validationMessage {
+		margin-left: 1em;
+		vertical-align: middle;
+		font-size: 16px;
+		color: $red;
+	}
+
+	label.required:after {
+		content: "*";
+		color: $red;
+		padding-left: 0.1em;
+	}
+
+	.input-group {
+		display: table;
+		overflow: hidden;
+
+		.form-control {
+			display: table-cell;
+			width: 100%;
+			margin: 0;
+			vertical-align: middle;
+			@include border-radius(0);
+		}
+
+		.btn {
+			display: table-cell;
+			width: 1%;
+			margin: 0;
+			padding: 6px 12px;
+			vertical-align: middle;
+			border-top: 1px solid $primaryColor;
+			border-bottom: 1px solid $primaryColor;
+
+			&:last-child {
+				border-right: 1px solid $primaryColor;
+			}
+		}
+	}
+
+	.form-group {
+		display: inline-block;
+		width: 100%;
+		margin-bottom: 1em;
+
+		label {
+			display: block;
+		}
+
+		input {
+			width: 100%;
+		}
+	}
+}

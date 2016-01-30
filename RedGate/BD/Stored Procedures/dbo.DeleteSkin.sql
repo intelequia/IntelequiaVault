@@ -1,0 +1,14 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[DeleteSkin]
+
+	@SkinID		int
+
+AS
+
+DELETE
+	FROM	dbo.Skins
+	WHERE   SkinID = @SkinID
+GO

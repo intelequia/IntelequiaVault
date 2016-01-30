@@ -1,0 +1,358 @@
+div[id*="IntelequiaSecure"].container-fluid {
+	margin: 0 -15px;
+	padding: 0;
+}
+
+.loading-icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 2em;
+	width: 2em;
+	margin-left: -1em;
+	color: $primaryColor;
+}
+
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.heading {
+	margin-bottom: 1em;
+
+	.title {
+		padding: 0px;
+		white-space: nowrap;
+		border: 2px solid $accentColor;
+		color: $accentColor;
+		@extend %text-ellipsis;
+
+		.icon {
+			display: inline-block;
+			margin-right: 0.2em;
+			padding: 0.1em 0.5em 0.2em;
+			text-align: center;
+			background-color: $primaryColor;
+
+			.fa {
+				color: $white;
+				font-size: 0.8em;
+				line-height: 0.8em;
+			}
+
+			.fa-key {
+				@include rotate(90deg);
+			}
+		}
+
+		span, a {
+			line-height: normal;
+			font-size: inherit;
+			white-space: nowrap;
+			color: $textColor;
+		}
+	}
+
+	.heading-action {
+		float: right;
+		display: inline-block;
+		padding: 0.1em 0.5em 0.2em;
+		text-align: center;
+		@include transition(background-color 0.3s ease-in-out);
+		color: $textColor;
+		font-size: inherit;
+		cursor: pointer;
+
+		&:hover {
+			background-color: $tertiaryColor;
+			color: $primaryColor;
+		}
+
+		.fa {
+			font-size: 0.8em;
+			line-height: 0.8em;
+		}
+	}
+}
+
+.groups-panel {
+	padding: 1em 0;
+
+	.group-panel {
+		border: 1px solid $primaryColor;
+		background-color: $lightGrey;
+
+		& + .group-panel {
+			margin-top: 0.7em;
+		}
+
+		.group-heading {
+			overflow: hidden;
+		}
+
+		.group-title {
+			display: block;
+			margin: 0 -15px;
+			padding: 0;
+			text-decoration: none;
+			color: $textColor;
+			@extend %text-ellipsis;
+
+			.hover-arrow {
+				opacity: 0;
+				@include transition(all 0.3s ease-in-out);
+				@include translate(-100%, 0);
+			}
+
+			&:hover .hover-arrow {
+				opacity: 1;
+				@include translate(0, 0);
+			}
+
+			&.active .hover-arrow {
+				opacity: 1;
+			}
+
+			&[aria-expanded="true"] .hover-arrow {
+				@include rotate(90deg);
+			}
+
+			&:focus {
+				outline: none;
+			}
+
+			@media screen and (max-width: 992px) {
+
+				// .hover-arrow, &.collapsed .hover-arrow {
+				// 	display: none;
+				// 	float: left;
+				// 	margin-top: 0.15em;
+				// 	margin-right: 0.5em;
+				// 	opacity: 1;
+				// 	@include translate(0, 0);
+				// }
+
+				.group-icon {
+					padding: 0.6em 0.8em;
+				}
+			}
+
+
+			@media screen and (max-width: 767px) {
+				padding-right: 2em;
+
+				.hover-arrow, &.collapsed .hover-arrow {
+					position: absolute;
+					right: 0;
+					top: 50%;
+					display: block;
+					margin-top: -7px;
+					margin-right: 5px;
+					opacity: 1;
+					@include translate(0, 0);
+				}
+			}
+		}
+
+		.group-actions-mobile {
+			border-top: 1px solid $primaryColor;
+		}
+
+		.group-action {
+			display: inline-block;
+			padding: 0.8em 1em;
+			// margin-right: -15px;
+			text-align: center;
+			@include transition(background-color 0.3s ease-in-out);
+			color: $textColor;
+
+			&:hover {
+				background-color: $tertiaryColor;
+				color: $primaryColor;
+			}
+
+			@media screen and (max-width: 992px) {
+				padding: 0.6em 0.8em;
+			}
+
+			&:last-child {
+				margin-right: -15px;
+			}
+
+			@media screen and (max-width: 767px) {
+				&:last-child {
+					margin-right: 0px;
+				}
+			}
+		}
+
+		.sendmail {
+			opacity: 0;
+			visibility: hidden;
+			@include transition(all 0.3s ease-in-out);
+			@include translate(-100px);
+
+			&.sendmail-visible {
+				opacity: 1;
+				visibility: visible;
+				@include translate();
+				animation: blink-bg 1.6s;
+				animation-delay: 0.3s;
+				animation-iteration-count: 1;
+				animation-timing-function: ease-in-out;
+			}
+		}
+
+		.group-body {
+			padding: 1em;
+			border-top: 1px solid $primaryColor;
+			background-color: $white;
+		}
+
+		.group-icon {
+			display: inline-block;
+			padding: 0.8em 1em;
+			margin-right: 0.5em;
+			text-align: center;
+			background-color: $primaryColor;
+			color: $white;
+		}
+
+		.resource-heading {
+			position: relative;
+			overflow: hidden;
+			z-index: 0;
+			border: 1px solid $secondaryColor;
+			@include transition(all 0.4s ease-in-out);
+
+			.resource-actions {
+				float: right;
+			}
+		}
+
+		.resource-icon {
+			@extend .group-icon;
+			@include transition(background-color 0.4s ease-in-out);
+
+			background-color: $secondaryColor;
+			padding: 0.3em 0.5em;
+			margin-right: 0.4em;
+
+			.fa {
+				font-size: 0.9em;
+
+				&.fa-key {
+					@include rotate(90deg);
+				}
+			}
+		}
+
+		.resource-action {
+			@extend .group-action;
+			float: right;
+			margin-right: 0;
+			padding: 0.3em 0.5em;
+
+			.fa {
+				font-size: 0.9em;
+
+				&.fa-key {
+					@include rotate(90deg);
+				}
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		.resource-value {
+			padding: 1em;
+			overflow: hidden;
+
+			&.blurred {
+				@include blur();
+				@include user-select(none);
+			}
+		}
+
+		.selected-resource {
+			
+
+			.resource-heading {
+				border: 1px solid $tertiaryColor;
+
+				.resource-icon {
+					background-color: $tertiaryColor;
+					color: $primaryColor;
+				}
+			}
+		}
+	}
+}
+
+.user-permissions,
+.role-permissions {
+	padding: 1em 0;
+	
+	@media screen and (max-width: 992px) {
+		.permission-type {
+			display: inline-block !important;
+		}
+
+		.user-displayname, .role-name {
+			font-weight: bold;
+			vertical-align: middle;
+		}
+	}
+
+	.permission {
+		padding: 0.5em 0;
+	}
+}
+
+.user-permissions {
+	.user-displayname {
+		margin-bottom: 15px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	@-moz-document url-prefix() {
+	    .heading .title {
+	        white-space: normal;
+	    }
+	}
+}
+
+.message-body {
+	border: 1px solid #4C4556;
+	padding: 1em;
+	@include user-select(none);
+	cursor: default;
+}
+
+div[id*="ViewMessage"] .message-body {
+	@include user-select(text);
+}
+
+.expire-date-group {
+	.input-group {
+		margin-bottom: 1em;
+	}
+
+	span.btn {
+		background-color: $accentColor;
+		color: $white;
+		cursor: default;
+	}
+}

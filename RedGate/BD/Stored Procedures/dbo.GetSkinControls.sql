@@ -1,0 +1,10 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetSkinControls]
+AS
+    SELECT *
+    FROM   dbo.SkinControls
+	ORDER BY  ControlKey
+GO

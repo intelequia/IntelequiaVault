@@ -1,0 +1,15 @@
+﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Message]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Message]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Permission]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Permission]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Resource]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Resource]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Group]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}iss_IntelequiaSecure_Group]
+GO

@@ -1,0 +1,37 @@
+﻿@charset "UTF-8";
+
+// PEX SKIN
+//============/
+// Aquí se definen todos los módulos que se van a compilar en 
+// el CSS definitivo del skin. (../css/skin.css)
+// Para habilitar/deshabilitar módulos ir a "lib/settings.scss"
+
+// BOOTSTRAP
+//=============/
+// Cambiar el min-height del Grid-System a 0px (default: 1px)
+
+
+// Librerías
+//=============/
+@import "lib/settings.scss";
+@import "lib/mixins.scss";
+@import "lib/functions.scss";
+@import "lib/placeholders.scss";
+
+// Presets
+//===========/
+@import "presets/links.scss";
+
+// Componentes
+//===============/
+@import "components/accordion.scss"; // opcional
+@import "components/alerts.scss"; // opcional
+@import "components/buttons.scss"; // opcional
+@import "components/forms.scss"; // opcional
+@import "components/typography.scss";
+@import "components/animations.scss"; // opcional
+
+// Layout
+//==========/
+@import "layout/grid.scss";
+@import "layout/site.scss";

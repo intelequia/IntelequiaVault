@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{896C88E1-52FF-473C-AE5A-1B4EDCD7BA4F}"
+	ProjectSection(SolutionItems) = preProject
+		.build\MSBuild.Community.Tasks.dll = .build\MSBuild.Community.Tasks.dll
+		.build\MSBuild.Community.Tasks.targets = .build\MSBuild.Community.Tasks.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intelequia.Secure.Spa", "Intelequia.Secure.Spa\Intelequia.Secure.Spa.csproj", "{FD40B8D5-A4A4-4F56-8C68-1A12630F45FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intelequia.Secure.Data", "Intelequia.Secure.Api\Intelequia.Secure.Data.csproj", "{0F64171B-E59A-42E8-B773-DCC2F9543678}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD40B8D5-A4A4-4F56-8C68-1A12630F45FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD40B8D5-A4A4-4F56-8C68-1A12630F45FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD40B8D5-A4A4-4F56-8C68-1A12630F45FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD40B8D5-A4A4-4F56-8C68-1A12630F45FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F64171B-E59A-42E8-B773-DCC2F9543678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F64171B-E59A-42E8-B773-DCC2F9543678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F64171B-E59A-42E8-B773-DCC2F9543678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F64171B-E59A-42E8-B773-DCC2F9543678}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://intelequia.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Intelequia.Secure.Spa\\Intelequia.Secure.Spa.csproj
+		SccProjectName1 = Intelequia.Secure.Spa
+		SccLocalPath1 = Intelequia.Secure.Spa
+		SccProjectUniqueName2 = Intelequia.Secure.Api\\Intelequia.Secure.Data.csproj
+		SccProjectName2 = Intelequia.Secure.Api
+		SccLocalPath2 = Intelequia.Secure.Api
+	EndGlobalSection
+EndGlobal

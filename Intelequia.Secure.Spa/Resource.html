@@ -1,0 +1,126 @@
+﻿[JavaScript:{ jsname: "JQuery" }]
+[JavaScript:{ jsname: "Knockout" }]
+[JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/knockout.validation.min.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Resource.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Common.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Trumbowyg/trumbowyg.min.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Trumbowyg/trumbowyg.base64.min.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Trumbowyg/trumbowyg.colors.min.js"}]
+
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/font-awesome.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/Trumbowyg/trumbowyg.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/Trumbowyg/colors/trumbowyg.colors.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/module.css"}]
+
+<div id="iss_IntelequiaSecure_Resource_[ModuleContext:ModuleId]">
+    <div class="heading">
+        <h3 class="title">
+            <span class="icon">
+                <em class="fa fa-book"></em>
+            </span>
+            <span data-bind="text: resourceGroupName"></span>
+            <!-- ko if: resourceKey -->
+            - <span data-bind="text: resourceKey"></span>
+            <!-- /ko -->
+            <!-- ko if: !resourceKey() -->
+            - <span>[Resx:{key:"NewEntry"}]</span>
+            <!-- /ko -->
+        </h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>[Resx:{key:"Key"}]:</label>
+                <input type="text" class="form-control required" maxlength="150" data-bind="value: resourceKey, validationElement: resourceKey" placeholder="[Resx:{key:'Key'}]" />
+                <div data-bind="validationMessage: resourceKey" class="text-alert text-danger" style="display: none;">
+                    <span data-bind="validationMessage: resourceKey"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>[Resx:{key:'Secret'}]:</label>
+                <!--<textarea class="form-control required" rows="8" data-bind="value: resourceValue, validationElement: resourceValue" placeholder="[Resx:{key:'ResourceValue'}]"></textarea>-->
+                <div class="editor-wrapper">
+                    <div id="ResourceValueEditor"></div>
+                    <div data-bind="validationMessage: resourceValue" class="text-alert text-danger" style="display: none;">
+                        <span data-bind="validationMessage: resourceValue"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+    <div class="text-right">
+        <a href="#" class="btn btn-icon btn-tertiary" data-bind="attr:{href: postBackUrl}">
+            <em class="fa fa-arrow-left"></em>
+            <span>[Resx:{key:'Back'}]</span>
+        </a>
+        <a href="#" class="btn btn-icon btn-secondary" title="[Resx:{key:'DeleteResource.Help'}]" data-bind="click: deleteResourceConfirm">
+            <em class="fa fa-times"></em>[Resx:{key:'Delete'}]
+        </a>
+        <a href="#" class="btn btn-icon btn-primary" data-bind="click: saveResource">
+            <em class="fa fa-floppy-o"></em>
+            <span>[Resx:{key:'Save'}]</span>
+        </a>
+    </div>
+
+    <!-- ko if: deleteResourceVisible -->
+    <div class="delete-resource">
+        <div class="alert alert-warning text-left">
+            <p>[Resx:{key:"ConfirmDeteleEntry"}]</p>
+            <br />
+            <div class="text-right">
+                <a href="#" class="btn btn-icon" data-bind="click: deleteResource">[Resx:{key:"Yes"}]</a>
+                <a href="#" class="btn btn-icon btn-secondary" data-bind="click: deleteResourceCancel">[Resx:{key:"No"}]</a>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+    <script language="javascript" type="text/javascript">
+        jQuery(function ($) {
+            var moduleId = parseInt("[ModuleContext:ModuleId]");
+
+            var localizedSettings = {
+                RequiredResourceKey: "[Resx:{key:'KeyRequired'}]",
+                ResourceSaved: "[Resx:{key:'EntrySaved'}]",
+                ResourceNotSaved: "[Resx:{key:'EntryNotSaved'}]"
+            };
+
+            var editorOptions = {
+                closable: false,
+                mobile: true,
+                tablet: true,
+                fullscreenable: false,
+                semantic: true,
+                removeformatPasted: true,
+                autogrow: true,
+                btnsDef: {
+                    // Customizable dropdowns
+                    image: {
+                        dropdown: ['insertImage', 'base64'],
+                        ico: 'insertImage'
+                    }
+                },
+                btns: ['viewHTML',
+                    '|', 'formatting',
+                    '|', 'btnGrp-design',
+                    '|', 'link',
+                    '|', 'image',
+                    '|', 'btnGrp-justify',
+                    '|', 'btnGrp-lists',
+                    '|', 'horizontalRule',
+                    '|', 'foreColor', 'backColor']
+            };
+
+            var viewmodel = new intelequiaSecure.ResourceViewModel(moduleId, localizedSettings);
+            viewmodel.init(editorOptions);
+
+            ko.applyBindings(viewmodel, $("#iss_IntelequiaSecure_Resource_" + moduleId)[0]);
+        });
+    </script>
+

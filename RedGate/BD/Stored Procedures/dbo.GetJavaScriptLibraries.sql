@@ -1,0 +1,8 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetJavaScriptLibraries]
+AS
+	SELECT * FROM dbo.JavaScriptLibraries
+GO

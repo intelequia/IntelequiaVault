@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+// PLACEHOLDERS
+//================/
+
+// Recortar texto
+%text-ellipsis {
+	overflow : hidden;
+	text-overflow : ellipsis;
+	white-space : nowrap;
+}
+
+// Containing floats
+%clear {
+	&:after{
+        content:"";
+        display:block;
+        clear:both;
+    }
+}
+
+%background-cover {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+%background-contain-left {
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+%background-contain-right {
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

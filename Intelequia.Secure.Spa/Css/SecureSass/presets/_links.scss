@@ -1,0 +1,27 @@
+
+// ENLACES
+//===========/
+
+a {
+	text-decoration : none;
+	color : $linkColor;
+
+	&:visited {
+		color : $linkColorVisited;
+	}
+
+	&:hover {
+		text-decoration : underline;
+		color : $linkColorHover;
+	}
+
+	&:focus {
+		outline : none;
+		color : $linkColorFocus;
+	}
+
+	&:hover,
+	&:active {
+		outline : 0;
+	}
+}

@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+@if $include-accordion == true {
+	.accordion, .accordion * {
+		-webkit-box-sizing: border-box; 
+		-moz-box-sizing: border-box; 
+		box-sizing: border-box;
+	}
+
+	.accordion {
+		overflow: hidden;
+	}
+
+	.accordion-panel {
+		overflow: hidden;
+	}
+
+	.accordion-collapse {
+		display: none;
+
+		&.open {
+			display: block;
+		}
+	}
+}

@@ -1,0 +1,10 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetAllTabs] 
+AS
+	SELECT *
+		FROM dbo.vw_Tabs
+		ORDER BY Level, ParentID, TabOrder
+GO

@@ -1,0 +1,10 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[DeleteSimpleTerm] 
+	@TermId			int
+AS
+	DELETE FROM dbo.Taxonomy_Terms
+	WHERE TermID = @TermID
+GO

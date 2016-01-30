@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+@if $include-buttons == true {
+
+// BUTTONS
+//===========/
+a.btn, .btn {
+    display: inline-block;
+    padding: 7px 12px;
+    background-color: $accentColor;
+    border: none;
+    color: $white;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-bottom: 15px;
+    @include transition(all 0.2s linear);
+
+    &:visited {
+        color : $white;
+    }
+
+    &:hover {
+        color: $primaryColor;
+        text-decoration: none;
+        background-color: $tertiaryColor;
+    }
+
+    &:active,
+    &:focus {
+        outline:none;
+        color: $white;
+        text-decoration: none;
+    }
+
+    &.btn-icon .fa {
+        margin-right: 5px;
+    }
+}
+
+a.btn-secondary, .btn-secondary {
+    @extend .btn;
+    background-color: $accentColorLight;
+}
+
+a.btn-tertiary, .btn-tertiary {
+    @extend .btn;
+    background-color: $grey;
+}
+
+a.btn-success, .btn-success {
+    @extend .btn;
+    background-color: $green;
+    color: $white;
+    cursor: default;
+
+    &:hover {
+        background-color: $green;
+        color: $white;
+    }
+}
+
+a.btn-warning, .btn-warning {
+    @extend .btn;
+    background-color: $yellow;
+    color: $white;
+    cursor: default;
+
+    &:hover {
+        background-color: $yellow;
+        color: $white;
+    }
+}
+
+a.btn-danger, .btn-danger {
+    @extend .btn;
+    background-color: $red;
+    color: $white;
+    cursor: default;
+
+    &:hover {
+        background-color: $red;
+        color: $white;
+    }
+}
+
+a.btn-inverse, .btn-inverse {
+    @extend .btn;
+    background-color: transparent;
+    color: $primaryColor;
+
+    &:visited {
+        color: $primaryColor;
+    }
+
+    &:hover {
+        background-color: $primaryColor;
+        color: $white;
+    }
+
+}
+
+} // endif

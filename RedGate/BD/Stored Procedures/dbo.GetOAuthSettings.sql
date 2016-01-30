@@ -1,0 +1,11 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetOAuthSettings]
+AS
+BEGIN
+
+SELECT * from dbo.[OAuthSettings] 
+END
+GO

@@ -1,0 +1,17 @@
+﻿<h3>Intelequia Vault</h3>
+<p class="Contributor">
+	Intelequia Software Solutions<br />
+	<a href="mailto:support@intelequia.com">support@intelequia.com</a><br />
+	<a href="https://intelequia.com">https://intelequia.com</a>
+</p>
+<hr/>
+
+<div class="License">
+	<h3>Release Notes</h3>
+	<p class="Owner">
+		<b>Version 01.00.00</b>
+	</p>
+	<p>
+		Initial release of Intelequia Vault module.
+	</p>
+</div>

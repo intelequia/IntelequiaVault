@@ -1,0 +1,72 @@
+﻿[JavaScript:{ jsname: "JQuery" }]
+[JavaScript:{ jsname: "Knockout" }]
+[JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/secure.bootstrap.min.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/ViewMessage.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Common.js"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/secure.bootstrap.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/font-awesome.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/module.css"}]
+
+<div id="iss_IntelequiaSecure_ViewMessage_[ModuleContext:ModuleId]" class="container-fluid">
+    
+    <div id="message" style="display: none" data-bind="visible: hasMessage">
+    
+        <div class="heading">
+            <h3 class="title">
+                <span class="icon">
+                    <em class="fa fa-envelope-o"></em>
+                </span>
+                <span>[Resx:{key:"Message"}]</span>
+            </h3>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>[Resx:{key:"To"}]:</label>
+                    <span data-bind="text: messageTo"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>[Resx:{key:"Subject"}]:</label>
+                    <span data-bind="text: subject"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-right">
+            <span>[Resx:{key:"ExpireDate"}]: </span> <span data-bind="text: expireDateString"></span>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="message-body">
+                        <div data-bind="html: body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    jQuery(function ($) {
+        var moduleId = parseInt("[ModuleContext:ModuleId]");
+
+        var localizedSettings = {
+            MessageNotExist: "[Resx:{key:'MessageNotExist'}]"
+        };
+
+        var viewmodel = new intelequiaSecure.ViewMessageViewModel(moduleId, localizedSettings);
+        viewmodel.init();
+
+        ko.applyBindings(viewmodel, $("#ViewMessage-" + moduleId)[0]);
+    });
+</script>

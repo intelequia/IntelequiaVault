@@ -1,0 +1,10 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetLegacyFolderCount]
+AS
+	SELECT COUNT(*)
+	FROM dbo.Folders
+		WHERE ParentID IS NULL AND FolderPath <> ''
+GO

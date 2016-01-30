@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BuildScriptsPath>$(MSBuildProjectDirectory)\BuildScripts</BuildScriptsPath>
+    <WebsitePath>C:\Websites\dnn741.dnndev.me</WebsitePath>
+    <WebsiteBinPath>$(WebsitePath)\bin</WebsiteBinPath>
+    <WebsiteInstallPath>$(WebsitePath)\Install\Module</WebsiteInstallPath>
+    <Extension>zip</Extension>
+    <DNNFileName>Intelequia.Secure.Spa</DNNFileName>
+    <PackageName>Intelequia.Secure.Spa</PackageName>
+    <ModuleFolderName>$(WebsitePath)\DesktopModules\Intelequia\Secure</ModuleFolderName>
+    <DependencyAssemblyName>Intelequia.Secure.Data</DependencyAssemblyName>
+  </PropertyGroup>
+  <Target Name="CopyBin">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(WebsiteBinPath)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).pdb" DestinationFolder="$(WebsiteBinPath)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(DependencyAssemblyName).dll" DestinationFolder="$(WebsiteBinPath)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(DependencyAssemblyName).pdb" DestinationFolder="$(WebsiteBinPath)" />
+  </Target>
+</Project>

@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,700);
+
+// @font-face {
+// 	font-family: "Otari Bold";
+// 	src: url("#{$fontDir}/OtariBoldLimited-webfont.eot");
+// 	src: url("#{$fontDir}/OtariBoldLimited-webfont.eot") format("embedded-opentype"), url("#{$fontDir}/OtariBoldLimited-webfont.woff2") format("woff2"), url("#{$fontDir}/OtariBoldLimited-webfont.woff") format("woff"), url("#{$fontDir}/OtariBoldLimited-webfont.ttf") format("truetype");
+// 	font-weight: bold;
+// 	font-style: normal;
+// }
+
+// Mapa donde se define el tamaño base de la fuente
+// según el tipo de pantalla
+$responsive-typography: (
+	xsmall: (
+		base-font-size: 14px,
+		type-scale: 1.3,
+		min-width: null
+		),
+	small: (
+		base-font-size: 15px,
+		type-scale: 1.4,
+		min-width: 768px
+		),
+	medium: (
+		base-font-size: 16px,
+		type-scale: 1.4,
+		min-width: 992px
+		),
+	large: (
+		base-font-size: 18px,
+		type-scale: 1.5,
+		min-width: 1200px
+		)
+	);
+
+// Etiquetas que definen el escalado del tamaño 
+// de la fuente de forma progresiva. (de menor a mayor)
+$scale-labels: (regular, medium, large, vlarge, xlarge, huge);
+
+@each $label in $scale-labels {
+	%#{$label} {
+		@each $breakpoint, $data in $responsive-typography {
+			$generated-values: generate-font-size($label, $breakpoint);
+			$font-size: round(nth($generated-values, 1)*10)/10;
+
+			@if map-get($data, min-width) != null {
+				@media screen and (min-width: map-get($data, min-width)) {
+					font-size: $font-size;
+					line-height: normal;
+				}
+				} @else {
+					font-size: $font-size;
+					line-height: normal;
+				}
+			}
+		}
+	}
+
+// HEADINGS
+//============/
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-family: $baseHeadingFont;
+	font-weight: $baseHeadingFontWeight;
+	color: $textColor;
+	line-height: normal;
+	
+	&.upperHeader {
+		text-transform: uppercase;
+	}
+}
+
+h1 .small,
+h2 .small,
+h3 .small {
+	font-weight: normal;
+	display: inline-block;
+	color: $grey;
+	font-size: 0.5em;
+
+	&.block {
+		display: block;
+		padding-top: 0.5em;
+	}
+}
+
+
+.huge {
+	@extend %huge;
+}
+h1, .text-xlarge {
+	@extend %xlarge;
+}
+h2, .text-vlarge {
+	@extend %vlarge;
+}
+h3, .text-large {
+	@extend %large;
+}
+h4, h5, h6, .text-medium {
+	@extend %medium;
+}
+
+p, .text-regular, a, span, div, ul, li, em {
+	@extend %regular;
+}

@@ -1,0 +1,10 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetUnIndexedContentItems] 
+AS
+	SELECT *
+	FROM dbo.ContentItems
+	WHERE Indexed = 0
+GO

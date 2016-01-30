@@ -1,0 +1,16 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[DeleteEventLog]	
+    @LogGUID varchar(36)
+AS
+BEGIN
+    IF @LogGUID is null
+    BEGIN
+        DELETE FROM dbo.EventLog
+    END ELSE BEGIN
+        DELETE FROM dbo.EventLog WHERE LogGUID = @LogGUID
+    END
+END
+GO

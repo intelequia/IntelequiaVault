@@ -1,0 +1,10 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[GetExpiredPortals]
+
+AS
+SELECT * FROM dbo.vw_Portals
+WHERE ExpiryDate < getDate()
+GO
