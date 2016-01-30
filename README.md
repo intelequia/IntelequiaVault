@@ -7,11 +7,12 @@ If you want more information contact us in [Intelequia Software Solutions Site](
 
 Intelequia Vault includes the following built-in features:
 
-* Safe management of permissions by user or role
+* Safe management of permissions by role or user
 * Data encryption
-* Export and import of resource groups
+* Rich text editor
+* Export and import categories
 * Notification system by email
-* Language support: Spanish and English
+* Supported languages: English and Spanish
 
 
 
