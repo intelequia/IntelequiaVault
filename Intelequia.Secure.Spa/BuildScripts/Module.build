@@ -12,9 +12,9 @@
     <DependencyAssemblyName>Intelequia.Secure.Data</DependencyAssemblyName>
   </PropertyGroup>
   <Target Name="CopyBin">
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(WebsiteBinPath)" />
+    <!--<Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(WebsiteBinPath)" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).pdb" DestinationFolder="$(WebsiteBinPath)" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(DependencyAssemblyName).dll" DestinationFolder="$(WebsiteBinPath)" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(DependencyAssemblyName).pdb" DestinationFolder="$(WebsiteBinPath)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(DependencyAssemblyName).pdb" DestinationFolder="$(WebsiteBinPath)" />-->
   </Target>
 </Project>

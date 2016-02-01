@@ -2,19 +2,15 @@
 [JavaScript:{ jsname: "Knockout" }]
 [JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/knockout.validation.min.js"}]
-[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/secure.bootstrap.min.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/SendMessage.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Common.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Trumbowyg/trumbowyg.min.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Trumbowyg/trumbowyg.base64.min.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Trumbowyg/trumbowyg.colors.min.js"}]
-
-[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/secure.bootstrap.min.css"}]
-[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/font-awesome.min.css"}]
-[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/module.css"}]
-
 [Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/Trumbowyg/trumbowyg.min.css"}]
 [Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/Trumbowyg/colors/trumbowyg.colors.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/font-awesome.min.css"}]
+[Css:{ path: "~/DesktopModules/Intelequia/Secure/Css/module.css"}]
 
 <div id="iss_IntelequiaSecure_SendMessage_[ModuleContext:ModuleId]" class="container-fluid">
     <div class="heading">
@@ -25,46 +21,41 @@
             <span>[Resx:{key:"SendMessageTittle"}]</span>
         </h3>
     </div>
-
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
                 <label>[Resx:{key:"To"}]</label>
-                <input type="text" class="form-control required" placeholder="[Resx:{key:'To.Help'}]" data-bind="value: messageTo, validationElement: messageTo"/>
+                <input type="text" class="form-control required" placeholder="[Resx:{key:'To.Help'}]" data-bind="value: messageTo, validationElement: messageTo" />
                 <div data-bind="validationMessage: messageTo" class="text-alert text-danger" style="display: none;">
                     <span data-bind="validationMessage: messageTo"></span>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label>[Resx:{key:"Co"}]</label>
-                <input type="text" class="form-control" placeholder="[Resx:{key:'Co.Help'}]" data-bind="value: messageCc, validationElement: messageCc"/>
+                <input type="text" class="form-control" placeholder="[Resx:{key:'Co.Help'}]" data-bind="value: messageCc, validationElement: messageCc" />
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label>[Resx:{key:"Cco"}]</label>
-                <input type="text" class="form-control" placeholder="[Resx:{key:'Cco.Help'}]" data-bind="value: messageCco, validationElement: messageCco"/>
+                <input type="text" class="form-control" placeholder="[Resx:{key:'Cco.Help'}]" data-bind="value: messageCco, validationElement: messageCco" />
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label>[Resx:{key:"Subject"}]</label>
-                <input type="text" class="form-control required" placeholder="[Resx:{key:'Subject.Help'}]" data-bind="value: subject, validationElement: subject"/>
+                <input type="text" class="form-control required" placeholder="[Resx:{key:'Subject.Help'}]" data-bind="value: subject, validationElement: subject" />
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -75,7 +66,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -86,7 +76,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -98,12 +87,10 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label>[Resx:{key:"ExpireDate"}]</label>
-
                 <div class="expire-date-group">
                     <div class="row">
                         <div class="col-sm-4">
@@ -127,18 +114,16 @@
             </div>
         </div>
     </div>
-
     <div class="action-buttons text-right">
         <div data-bind="visible: actionsVisible">
             <a href="#" class="btn btn-icon" data-bind="click: sendMessage">
-                <em class="fa fa-save"></em>[Resx:{key:"Send"}]
+                <em class="fa fa-paper-plane"></em> [Resx:{key:"Send"}]
             </a>
             <a href="#" class="btn btn-icon btn-secondary" data-bind="click: deleteMessageConfirm">
                 <em class="fa fa-arrow-left"></em>[Resx:{key:"Discard"}]
             </a>
         </div>
     </div>
-
     <!-- ko if: cancelMessageVisible -->
     <div class="delete-resource">
         <div class="alert alert-warning text-left">
@@ -152,8 +137,6 @@
     </div>
     <!-- /ko -->
 </div>
-
-
 
 <script language="javascript" type="text/javascript">
     jQuery(function ($) {

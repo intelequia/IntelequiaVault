@@ -13,10 +13,8 @@ intelequiaSecure.Message = function (data) {
 
 intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
     var resourceGroupId = ko.observable("");
-
     var utils = new common.Utils();
     var alert = new common.Alert();
-
     var messageId = ko.observable("");
     var messageFrom = ko.observable("");
     var messageTo = ko.observable("").extend({ required: { message: resx.RequiredMessageTo, params: true } }).extend({ multiemail: { params: true, message: resx.EmailsNotValid } });
@@ -28,10 +26,9 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
     var body = ko.observable("");
     var date = ko.observable("").extend({ required: { message: resx.RequiredDate, params: true } });
     var hour = ko.observable("").extend({ required: { message: resx.RequiredDate, params: true } });
-
     var cancelMessageVisible = ko.observable(false);
-
     var actionsVisible = ko.observable(true);
+    var isSending = ko.observable(false);
 
     var expireDate = ko.computed(function () {
         if (hour() === "")
@@ -40,10 +37,7 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
             return date() + " " + hour();
     });
 
-    var isLoading = ko.observable(false);
-
     var service = { path: "Intelequia/Secure", framework: $.ServicesFramework(moduleId), controller: "Message" }
-
     service.baseUrl = service.framework.getServiceRoot(service.path);
 
     ko.validation.init({ insertMessages: false, decorateElement: false });
@@ -51,35 +45,29 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
     var refreshMessage = function (resourceGroupId, messageId) {
         var el = "#iss_IntelequiaSecure_SendMessage_" + moduleId;
 
-        alert.dismiss({ selector: el });
+        alert.dismiss({ selector: el }, function () {
 
-        var params = {
-            messageId: messageId,
-            resourceGroupId: resourceGroupId
-        };
-        
-        //if (typeof ($(el).attr("aria-expanded")) === "undefined" || $(el).attr("aria-expanded") === "false") {
+            var params = {
+                messageId: messageId,
+                resourceGroupId: resourceGroupId
+            };
+
             utils.get("GET", "GetMessage", service, params,
-                function (data) {
+                function (data) { // success
                     if (data.Success && data.Message) {
                         load(data.Message);
                     }
                 },
-                function (error, exception) {
-                    // fail
+                function (error, exception) { // fail
                     alert.danger({ selector: el, text: error.responseText, status: error.status });
-                },
-                function () {
-                    // always
-                    isLoading(false);
                 });
-        //}
+        });
     };
 
 
-    var sendMessage = function () {
+    var sendMessage = function (model, target) {
         var el = "#iss_IntelequiaSecure_SendMessage_" + moduleId;
-        isLoading(true);
+        var icon = $(target.currentTarget).find(".fa-paper-plane");
 
         head($('#MessageHeadEditor').trumbowyg('html'));
         head().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
@@ -107,33 +95,35 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
             body: head() + body() + foot(),
             expireDate: expireDate()
         });
-
-        var params = {
-            Message: message,
-            ResourceGroupId: resourceGroupId()
-        };
+        
 
         if (errors().length === 000) {
+            utils.loading(icon, "fa-paper-plane");
 
-        utils.get("POST", "SendMessage", service, params,
-                function (data) { // success
-                    if (data.Success) {
-                        alert.success({
-                            selector: el,
-                            text: resx.MessageSent,
-                            redirect: true,
-                            postBack: data.PostBackUrl
-                        });
-                } else {
-                    alert.danger({ selector: el, text: resx.MessageNotSent });
-                }
-            },
-                function (error, exception) { // fail
-                alert.danger({ selector: el, text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText, status: error.status });
-            },
-                function () { // always
-                isLoading(false);
-            });
+            var params = {
+                Message: message,
+                ResourceGroupId: resourceGroupId()
+            };
+
+            utils.get("POST", "SendMessage", service, params,
+                    function (data) { // success
+                        if (data.Success) {
+                            alert.success({
+                                selector: el,
+                                text: resx.MessageSent,
+                                redirect: true,
+                                postBack: data.PostBackUrl
+                            });
+                        } else {
+                            alert.danger({ selector: el, text: resx.MessageNotSent });
+                        }
+                    },
+                    function (error, exception) { // fail
+                        alert.danger({ selector: el, text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText, status: error.status });
+                    },
+                    function () { // always
+                        utils.loading(icon, "fa-paper-plane");
+                    });
         } else {
             errors.showAllMessages(true);
             window.scrollTo(0, 0);
@@ -143,7 +133,7 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
     var deleteMessageConfirm = function () {
         cancelMessageVisible(true);
     }
-        
+
     var cancelMessageCancel = function () {
         cancelMessageVisible(false);
     };
@@ -157,16 +147,13 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
         utils.get("POST", "Delete", service, params,
             function (data) { // success
                 if (data.Success) {
-                        location.href = data.ResourceGroupUrl;
+                    location.href = data.ResourceGroupUrl;
                 } else {
                     alert.danger({ selector: el, text: resx.MessageNotCancel });
-    }
+                }
             },
             function (error, exception) { // fail
                 alert.danger({ selector: el, text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText, status: error.status });
-            },
-            function () { // always
-                isLoading(false);
             });
     }
 
@@ -207,7 +194,6 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
     return {
         init: init,
         load, load,
-        isLoading: isLoading,
         messageId: messageId,
         messageTo: messageTo,
         messageFrom: messageFrom,
@@ -225,6 +211,7 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
         deleteMessageConfirm: deleteMessageConfirm,
         cancelMessageCancel: cancelMessageCancel,
         deleteMessage: deleteMessage,
-        cancelMessageVisible: cancelMessageVisible
+        cancelMessageVisible: cancelMessageVisible,
+        isSending: isSending
     };
 }

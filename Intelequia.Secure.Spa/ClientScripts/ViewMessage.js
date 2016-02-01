@@ -45,36 +45,34 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
             return date() + " " + hour();
     });
 
-    var isLoading = ko.observable(false);
-
     var service = { path: "Intelequia/Secure", framework: $.ServicesFramework(moduleId), controller: "Message" }
 
     service.baseUrl = service.framework.getServiceRoot(service.path);
 
     var refreshMessage = function (resourceGroupId, messageId) {
         var el = "#iss_IntelequiaSecure_ViewMessage_" + moduleId;
-        // TODO Aarón => Loading icon
-        alert.dismiss({ selector: el });
+        
+        alert.dismiss({ selector: el }, function () {
+            var params = {
+                messageId: messageId
+            };
 
-        var params = {
-            messageId: messageId
-        };
-
-        utils.get("GET", "GetEncryptMessage", service, params,
-            function (data) {
-                if (data.Success && data.Message) {
-                    load(data.Message);
-                    hasMessage(true);
-                } else {
-                    alert.danger({ selector: el, text: resx.MessageNotExist });
-                }
-            },
-            function (error, exception) {
-                alert.danger({ selector: el, text: error.responseText, status: error.status });
-            },
-            function () {
-                isLoading(false);
-            });
+            utils.get("GET", "GetEncryptMessage", service, params,
+                function (data) {
+                    if (data.Success && data.Message) {
+                        load(data.Message);
+                        hasMessage(true);
+                    } else {
+                        alert.danger({ selector: el, text: resx.MessageNotExist });
+                    }
+                },
+                function (error, exception) {
+                    alert.danger({ selector: el, text: error.responseText, status: error.status });
+                },
+                function () {
+                    isLoading(false);
+                });
+        });
     };
     
     var init = function () {
@@ -102,7 +100,6 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
     return {
         init: init,
         load, load,
-        isLoading: isLoading,
         messageId: messageId,
         messageTo: messageTo,
         messageFrom: messageFrom,
@@ -117,7 +114,6 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
         actionsVisible: actionsVisible,
         expireDateString: expireDateString,
         hasMessage:hasMessage,
-
         refreshMessage: refreshMessage
     };
 }

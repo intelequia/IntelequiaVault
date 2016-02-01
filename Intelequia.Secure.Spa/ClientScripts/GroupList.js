@@ -356,7 +356,7 @@ intelequiaSecure.ResourceViewModel = function (moduleId) {
 
                             timeout = setTimeout(function () {
                                 hideResource();
-                            }, 100000);
+                            }, 30000);
                         }
                     },
                     function (error, exception) {
