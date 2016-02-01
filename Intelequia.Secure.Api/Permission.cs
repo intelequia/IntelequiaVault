@@ -60,6 +60,4 @@ namespace Intelequia.Secure.Data
         public int Mu { get; set; }
 
     }
-
-
 }

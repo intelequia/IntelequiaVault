@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using DotNetNuke.Common;
 using DotNetNuke.Data;
 using DotNetNuke.Framework;
@@ -17,7 +15,7 @@ namespace Intelequia.Secure.Data
 
 
         /// <summary>
-        /// Get a message.
+        /// Gets a message.
         /// </summary>
         /// <param name="messageId">Message id to be obtained.</param>
         /// <returns></returns>
@@ -36,7 +34,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Insert a message in the database.
+        /// Inserts a message in the database.
         /// </summary>
         /// <param name="message">Message that is inserted into the database.</param>
         /// <returns></returns>
@@ -63,7 +61,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Upgrade a message.
+        /// Upgrades a message.
         /// </summary>
         /// <param name="message">Message to be updated.</param>
         /// <returns></returns>
@@ -98,7 +96,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Delete a record from the database.
+        /// Deletes a record from the database.
         /// </summary>
         /// <param name="messageId">Id of the record that is deleted.</param>
         /// <returns></returns>
@@ -138,10 +136,10 @@ namespace Intelequia.Secure.Data
                 {
                     var rep = ctx.GetRepository<Message>();
 
-                    // Gets the expired messages.
+                    // gets the expired messages.
                     var data = rep.Find($"WHERE ExpireDate < '{DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm:ss")}'");
 
-                    // And then deletes them
+                    // and then deletes them
                     foreach (var message in data)
                         rep.Delete(message);
                 }
@@ -153,5 +151,6 @@ namespace Intelequia.Secure.Data
                 return false;
             }
         }
+
     }
 }

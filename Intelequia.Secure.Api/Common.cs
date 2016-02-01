@@ -63,7 +63,11 @@ namespace Intelequia.Secure.Data
             return result;
         }
 
-
+        /// <summary>
+        /// Obtains the name of a role.
+        /// </summary>
+        /// <param name="rolId">Role Id</param>
+        /// <returns></returns>
         public static string GetRoleName(int rolId)
         {
             var rol = (from r in GetRoles() where r.RoleID == rolId select r).FirstOrDefault();

@@ -21,14 +21,14 @@ namespace Intelequia.Secure.Data
         Resource GetResource(Guid resourceId);
 
         /// <summary>
-        /// Insert a resource in the database.
+        /// Inserts a resource in the database.
         /// </summary>
         /// <param name="resource">Resource that is inserted into the database.</param>
         /// <returns></returns>
         Resource Create(Resource resource);
 
         /// <summary>
-        /// Upgrade a resource in the database.
+        /// Upgrades a resource in the database.
         /// </summary>
         /// <param name="resource">Resource that is updated in the database.</param>
         Resource Update(Resource resource);

@@ -94,7 +94,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Insert a group in the database
+        /// Inserts a group in the database
         /// </summary>
         /// <param name="group">New group to insert.</param>
         /// <returns></returns>
@@ -122,7 +122,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Upgrade a resource group.
+        /// Upgrades a resource group.
         /// </summary>
         /// <param name="group">Group that is updated.</param>
         /// <returns></returns>
@@ -148,14 +148,13 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Delete a record from the database.
+        /// Deletes a record from the database.
         /// </summary>
         /// <param name="groupId">Id of the record that is deleted.</param>
         /// <returns></returns>
         public bool Delete(Guid groupId)
         {
             Requires.NotNull("groupId");
-
 
             try
             {
@@ -178,7 +177,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Create an imported record in the database.
+        /// Creates an imported record in the database.
         /// </summary>
         /// <param name="group">Group that is imported.</param>
         /// <returns></returns>

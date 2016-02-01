@@ -30,28 +30,28 @@ namespace Intelequia.Secure.Data
         Group GetGroup(Guid resourceGroupId);
 
         /// <summary>
-        /// Insert a group in the database
+        /// Inserts a group in the database
         /// </summary>
         /// <param name="group">New group to insert.</param>
         /// <returns></returns>
         Group Create(Group group);
 
         /// <summary>
-        /// Upgrade a resource group.
+        /// Upgrades a resource group.
         /// </summary>
         /// <param name="group">Group that is updated.</param>
         /// <returns></returns>
         Group Update(Group group);
 
         /// <summary>
-        /// Delete a record from the database.
+        /// Deletes a record from the database.
         /// </summary>
         /// <param name="groupId">Id of the record that is deleted.</param>
         /// <returns></returns>
         bool Delete(Guid groupId);
 
         /// <summary>
-        /// Create an imported record in the database.
+        /// Creates an imported record in the database.
         /// </summary>
         /// <param name="group">Group that is imported.</param>
         /// <returns></returns>

@@ -12,21 +12,21 @@ namespace Intelequia.Secure.Data
         Message GetMessage(Guid messageId);
 
         /// <summary>
-        /// Insert a message in the database.
+        /// Inserts a message in the database.
         /// </summary>
         /// <param name="message">Message that is inserted into the database.</param>
         /// <returns></returns>
         Message Create(Message message);
 
         /// <summary>
-        /// Actualiza un mensaje.
+        /// Updates a message in the database.
         /// </summary>
         /// <param name="message">Message to be updated.</param>
         /// <returns></returns>
         Message Update(Message message);
 
         /// <summary>
-        /// Delete a message from the database.
+        /// Deletes a message from the database.
         /// </summary>
         /// <param name="messageId">Id del mensaje que se borra.</param>
         /// <returns></returns>

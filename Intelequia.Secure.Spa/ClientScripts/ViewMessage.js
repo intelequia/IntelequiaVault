@@ -60,7 +60,6 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
             messageId: messageId
         };
 
-        //if (typeof ($(el).attr("aria-expanded")) === "undefined" || $(el).attr("aria-expanded") === "false") {
         utils.get("GET", "GetEncryptMessage", service, params,
             function (data) {
                 if (data.Success && data.Message) {
@@ -71,14 +70,11 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
                 }
             },
             function (error, exception) {
-                // fail
                 alert.danger({ selector: el, text: error.responseText, status: error.status });
             },
             function () {
-                // always
                 isLoading(false);
             });
-        //}
     };
     
     var init = function () {
@@ -123,6 +119,5 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
         hasMessage:hasMessage,
 
         refreshMessage: refreshMessage
-    
     };
 }

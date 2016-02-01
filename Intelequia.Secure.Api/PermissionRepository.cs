@@ -57,7 +57,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Get permissions for a user in a group
+        /// Gets permissions for a user in a group
         /// </summary>
         /// <param name="resourceGroupId">Id of the obtained permission.</param>
         /// <param name="userId">It indicates from which user permissions are sought in a resource group.</param>
@@ -75,7 +75,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Insert a permit
+        /// Inserts a permission
         /// </summary>
         /// <param name="permission">Permission to be inserted.</param>
         /// <returns></returns>
@@ -107,7 +107,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Upgrade permission.
+        /// Upgrades permission.
         /// </summary>
         /// <param name="permission">Permission that is updated.</param>
         /// <returns></returns>
@@ -141,7 +141,7 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Deletes a permit.
+        /// Deletes a permission.
         /// </summary>
         /// <param name="permissionId">Id of the deleted permission.</param>
         /// <returns></returns>
@@ -170,10 +170,10 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Obtiene si el usuario tiene permiso de lectura para un grupo de recursos
+        /// Gets whether the user has read access to a resource group.
         /// </summary>
-        /// <param name="resourceGroupId">Id del permiso que se obtiene.</param>
-        /// <param name="userId">Usuario del que se buscan permisos en un grupo de recursos.</param>
+        /// <param name="resourceGroupId">Id of the permission.</param>
+        /// <param name="userId">User Id.</param>
         /// <returns></returns>
         public static IEnumerable<Permission> GetUserReadPermission(Guid resourceGroupId, int userId)
         {
@@ -185,10 +185,10 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Obtiene si el usuario tiene permiso de lectura para un grupo de recursos
+        /// Gets whether the user has read access to a resource group.
         /// </summary>
-        /// <param name="resourceGroupId">Id del permiso que se obtiene.</param>
-        /// <param name="userId">Usuario del que se buscan permisos en un grupo de recursos.</param>
+        /// <param name="resourceGroupId">Id of the permission.</param>
+        /// <param name="userId">User Id.</param>
         /// <returns></returns>
         public static IEnumerable<Permission> GetUserWritePermission(Guid resourceGroupId, int userId)
         {
@@ -200,11 +200,11 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Obtiene si el usuario pertenece a un grupo con permiso de lectura para un grupo de recursos
+        /// Gets whether the user belongs to a group with read permission for a resource group.
         /// </summary>
-        /// <param name="resourceGroupId">Id del permiso que se obtiene.</param>
-        /// <param name="userId">Usuario del que se buscan permisos en un grupo de recursos.</param>
-        /// <param name="userRoles">Roles del current user</param>
+        /// <param name="resourceGroupId">Resourcegroup Id.</param>
+        /// <param name="userId">User Id.</param>
+        /// <param name="userRoles">Rol Id.</param>
         /// <returns></returns>
         public static bool GetUserReadPermisionByRol(Guid resourceGroupId, int userId, string[] userRoles)
         {
@@ -228,10 +228,10 @@ namespace Intelequia.Secure.Data
         }
 
         /// <summary>
-        /// Obtiene si el usuario pertenece a un grupo con permiso de escritura para un grupo de recursos
+        /// Gets whether the user belongs to a group with read permission for a resource group.
         /// </summary>
-        /// <param name="resourceGroupId">Id del permiso que se obtiene.</param>
-        /// <param name="userId">Usuario del que se buscan permisos en un grupo de recursos.</param>
+        /// <param name="resourceGroupId">Resourcegroup Id.</param>
+        /// <param name="userId">User Id.</param>
         /// <returns></returns>
         public static bool GetUserWritePermisionByRol(Guid resourceGroupId, int userId, string[] userRoles)
         {
@@ -255,5 +255,6 @@ namespace Intelequia.Secure.Data
 
             return false;
         }
+
     }
 }

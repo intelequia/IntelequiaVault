@@ -21,7 +21,7 @@ namespace Intelequia.Secure.Data
         Permission GetPermission(int permissionId);
 
         /// <summary>
-        /// Get permissions for a user in a group.
+        /// Gets permissions for a user in a group.
         /// </summary>
         /// <param name="resourceGroupId">Resource from which the permits are obtained.</param>
         /// <param name="userId">User of the permissions that will be searched in the resource group.</param>
@@ -29,21 +29,21 @@ namespace Intelequia.Secure.Data
         IEnumerable<Permission> GetUserPermissions(Guid resourceGroupId, int userId);
 
         /// <summary>
-        /// Crea un permiso.
+        /// Creates a permission.
         /// </summary>
         /// <param name="permission">Permiso que se inserta.</param>
         /// <returns></returns>
         Permission Create(Permission permission);
 
         /// <summary>
-        /// Create a permit.
+        /// Updates a permission.
         /// </summary>
         /// <param name="permission">Permiso que se actualiza.</param>
         /// <returns></returns>
         Permission Update(Permission permission);
 
         /// <summary>
-        /// Deletes a permit.
+        /// Deletes a permission.
         /// </summary>
         /// <param name="permissionId">Id del permiso que se borra.</param>
         /// <returns></returns>

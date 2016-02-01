@@ -115,7 +115,7 @@ namespace Intelequia.Secure.Spa.Services
         #region Create
 
         /// <summary>
-        /// Crea el cuerpo del mensaje.
+        /// Creates the message body.
         /// </summary>
         /// <param name="resourcesId">Id of resources that are sent in the message.</param>
         /// <returns></returns>
@@ -182,7 +182,7 @@ namespace Intelequia.Secure.Spa.Services
         }
 
         /// <summary>
-        /// Create a message with a list of resources.
+        /// Creates a message with a list of resources.
         /// </summary>
         /// <param name="submitted">Group of Id from the resources with which the message is generated.</param>
         /// <returns></returns>
@@ -223,7 +223,7 @@ namespace Intelequia.Secure.Spa.Services
         #region Update
 
         /// <summary>
-        /// Create a Message object to update the database.
+        /// Creates a Message object to update the database.
         /// </summary>
         /// <param name="viewModel">Message to be updated.</param>
         /// <returns></returns>
