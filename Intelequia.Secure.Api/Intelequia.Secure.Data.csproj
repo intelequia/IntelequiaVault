@@ -69,9 +69,13 @@
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assemblies\ClientDependency.Core.dll" />
     <Content Include="Assemblies\DotNetNuke.dll" />
+    <Content Include="Assemblies\DotNetNuke.Web.Client.dll" />
     <Content Include="Assemblies\DotNetNuke.Web.dll" />
+    <Content Include="Assemblies\DotNetNuke.WebUtility.dll" />
     <Content Include="Assemblies\Newtonsoft.Json.dll" />
+    <Content Include="Assemblies\System.Net.Http.Formatting.dll" />
     <Content Include="Assemblies\System.Web.Http.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
