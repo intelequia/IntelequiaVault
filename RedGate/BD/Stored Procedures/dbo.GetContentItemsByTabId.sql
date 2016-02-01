@@ -1,9 +1,0 @@
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-CREATE PROCEDURE [dbo].[GetContentItemsByTabId] 
-	@TabId int
-AS
-	SELECT * FROM dbo.ContentItems WHERE TabID = @TabId
-GO
