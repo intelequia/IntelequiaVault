@@ -76,7 +76,6 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
             head("");
         }
 
-
         foot($('#MessageFootEditor').trumbowyg('html'));
         foot().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
 
