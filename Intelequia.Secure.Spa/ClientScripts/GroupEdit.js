@@ -46,83 +46,80 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
             ResourceGroupId: groupId
         };
 
-        utils.get("GET", "GetGroup", service, params,
-            function (data) {
-                // success
-                if (data.Success && data.Group) {
-                    var grp = new intelequiaSecure.GroupViewModel(moduleId, resx, viewmodel);
-                    grp.load(data.Group);
-                    group(grp);
-                    postBackUrl(data.PostBackUrl);
-                    getPermissions(moduleId, groupId);
-                    isAdministrator(data.CurrentUserIsAdministrator);
-                }
-            },
-            function (error, exception) {
-                postBackUrl(error.responseText.indexOf("PostBackUrl") > -1 ? JSON.parse(error.responseText).PostBackUrl : "/");
-                // fail
-                alert.danger({
-                    selector: el,
-                    text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
-                    redirect: error.status === 401
+        alert.dismiss({ selector: el }, function () {
+
+            utils.get("GET", "GetGroup", service, params,
+                function (data) {
+                    // success
+                    if (data.Success && data.Group) {
+                        var grp = new intelequiaSecure.GroupViewModel(moduleId, resx, viewmodel);
+                        grp.load(data.Group);
+                        group(grp);
+                        postBackUrl(data.PostBackUrl);
+                        getPermissions(moduleId, groupId);
+                        isAdministrator(data.CurrentUserIsAdministrator);
+                    }
+                },
+                function (error, exception) {
+                    // fail
+                    postBackUrl(error.responseText.indexOf("PostBackUrl") > -1 ? JSON.parse(error.responseText).PostBackUrl : "/");
+                    
+                    alert.danger({
+                        selector: el,
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                        status: error.status,
+                        redirect: error.status === 401
+                    });
                 });
-            },
-            function () {
-                // always
-                isLoading(false);
-            });
+        });
     };
 
     var getPermissions = function (moduleId, groupId) {
         service.controller = "Permission";
         var el = ".role-permissions";
-        alert.dismiss({ selector: el });
-
+        
         var params = {
             resourceGroupId: groupId
         };
 
-        utils.get("GET", "GetPermissions", service, params,
-            function (data) {
-                // success
-                if (data.Success) {
-                    // load role permissions
-                    rolePermissionList.removeAll();
-                    var underlyingArray = rolePermissionList();
-                    for (var i = 0; i < data.RolePermissions.length; i++) {
-                        var result = data.RolePermissions[i];
-                        var rp = new intelequiaSecure.PermissionViewModel(moduleId, resx, viewmodel);
-                        rp.load(result);
-                        underlyingArray.push(rp);
-                    }
-                    rolePermissionList.valueHasMutated();
+        alert.dismiss({ selector: el }, function () {
+            utils.get("GET", "GetPermissions", service, params,
+                function (data) {
+                    // success
+                    if (data.Success) {
+                        // load role permissions
+                        rolePermissionList.removeAll();
+                        var underlyingArray = rolePermissionList();
+                        for (var i = 0; i < data.RolePermissions.length; i++) {
+                            var result = data.RolePermissions[i];
+                            var rp = new intelequiaSecure.PermissionViewModel(moduleId, resx, viewmodel);
+                            rp.load(result);
+                            underlyingArray.push(rp);
+                        }
+                        rolePermissionList.valueHasMutated();
 
-                    // load user permissions
-                    userPermissionList.removeAll();
-                    underlyingArray = userPermissionList();
-                    for (var i = 0; i < data.UserPermissions.length; i++) {
-                        var result = data.UserPermissions[i];
-                        var up = new intelequiaSecure.PermissionViewModel(moduleId, resx, viewmodel);
-                        up.load(result);
-                        underlyingArray.push(up);
+                        // load user permissions
+                        userPermissionList.removeAll();
+                        underlyingArray = userPermissionList();
+                        for (var i = 0; i < data.UserPermissions.length; i++) {
+                            var result = data.UserPermissions[i];
+                            var up = new intelequiaSecure.PermissionViewModel(moduleId, resx, viewmodel);
+                            up.load(result);
+                            underlyingArray.push(up);
+                        }
+                        userPermissionList.valueHasMutated();
                     }
-                    userPermissionList.valueHasMutated();
-                }
-            },
-            function (error, exception) {
-                // fail
-                alert.danger({
-                    selector: el,
-                    text: JSON.parse(error.responseText).Message,
-                    status: error.status,
-                    redirect: error.status === 401
+                },
+                function (error, exception) {
+                    // fail
+                    alert.danger({
+                        selector: el,
+                        text: JSON.parse(error.responseText).Message,
+                        status: error.status,
+                        redirect: error.status === 401
+                    });
                 });
-            },
-            function () {
-                // always
-                isLoading(false);
-            });
+        });
     };
 
     var addUserConfirm = function () {
@@ -182,7 +179,6 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
         service.controller = "Permission";
         var el = ".new-user";
         var errors = ko.validation.group(this);
-        alert.dismiss({ selector: el });
 
         var userPermission = {
             permission: {
@@ -193,36 +189,34 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
             userName: newUserUserName()
         };
 
-        if (errors().length === 0) {
-            utils.get("POST", "SaveUserPermission", service, userPermission,
-            function (data) {
-                // success
-                if (data.Success) {
-                    resetNewUserProperties();
-                    getPermissions(moduleId, group().resourceGroupId());
-                } else {
+        alert.dismiss({ selector: el }, function () {
+            if (errors().length === 0) {
+                utils.get("POST", "SaveUserPermission", service, userPermission,
+                function (data) {
+                    // success
+                    if (data.Success) {
+                        resetNewUserProperties();
+                        getPermissions(moduleId, group().resourceGroupId());
+                    } else {
+                        alert.danger({
+                            selector: el,
+                            text: data.Message
+                        });
+                    }
+                },
+                function (error, exception) {
+                    // fail
                     alert.danger({
                         selector: el,
-                        text: data.Message
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                        status: error.status,
+                        redirect: error.status === 401
                     });
-                }
-            },
-            function (error, exception) {
-                // fail
-                alert.danger({
-                    selector: el,
-                    text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
-                    redirect: error.status === 401
                 });
-            },
-            function () {
-                // always
-                //isLoading(false);
-            });
-        } else {
-            errors.showAllMessages(true);
-        }
+            } else {
+                errors.showAllMessages(true);
+            }
+        });
     };
 
     return {
@@ -265,7 +259,6 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
     var saveResourceGroup = function () {
         service.controller = "Group";
         var el = "#iss_IntelequiaSecure_GroupEdit_" + moduleId;
-        alert.dismiss({ selector: el });
 
         var group = {
             ResourceGroupId: resourceGroupId(),
@@ -274,32 +267,30 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
 
         var errors = ko.validation.group(this);
 
-        if (errors().length === 0) {
-            utils.get("POST", "Save", service, group,
-            function (data) {
-                // success
-                if (data.Success) {
-                    editvm.group().load(data.Group);
-                    editvm.getPermissions(moduleId, data.Group.ResourceGroupId);
-                    editvm.editMode(true);
-                }
-            },
-            function (error, exception) {
-                // fail
-                alert.danger({
-                    selector: el,
-                    text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
-                    redirect: error.status === 401
+        alert.dismiss({ selector: el }, function () {
+            if (errors().length === 0) {
+                utils.get("POST", "Save", service, group,
+                function (data) {
+                    // success
+                    if (data.Success) {
+                        editvm.group().load(data.Group);
+                        editvm.getPermissions(moduleId, data.Group.ResourceGroupId);
+                        editvm.editMode(true);
+                    }
+                },
+                function (error, exception) {
+                    // fail
+                    alert.danger({
+                        selector: el,
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                        status: error.status,
+                        redirect: error.status === 401
+                    });
                 });
-            },
-            function () {
-                // always
-                //isLoading(false);
-            });
-        } else {
-            errors.showAllMessages(true);
-        }
+            } else {
+                errors.showAllMessages(true);
+            }
+        });
     };
 
     var deleteResourceGroupConfirm = function () {
@@ -313,14 +304,14 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
     var deleteResourceGroup = function () {
         service.controller = "Group";
         var el = ".delete-group";
-        alert.dismiss({ selector: el });
 
         var group = {
             ResourceGroupId: resourceGroupId(),
             ResourceName: resourceName()
         };
 
-        utils.get("POST", "Delete", service, group,
+        alert.dismiss({ selector: el }, function () {
+            utils.get("POST", "Delete", service, group,
             function (data) {
                 // success
                 if (data.Success) {
@@ -335,11 +326,8 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
                     status: error.status,
                     redirect: error.status === 401
                 });
-            },
-            function () {
-                // always
-                //isLoading(false);
             });
+        });
     };
 
     var load = function (data) {
@@ -382,8 +370,7 @@ intelequiaSecure.PermissionViewModel = function (moduleId, resx, editvm) {
 
     var savePermission = function (viewmodel) {
         service.controller = "Permission";
-        //isLoading(true);
-        alert.dismiss({ selector: "[class*='-permissions']" });
+        var el = "[class*='-permissions']";
 
         var permission = {
             PermissionId: viewmodel.permissionId(),
@@ -396,12 +383,13 @@ intelequiaSecure.PermissionViewModel = function (moduleId, resx, editvm) {
             WritePermission: viewmodel.writePermission()
         };
 
-        utils.get("POST", "Save", service, permission,
+        alert.dismiss({ selector: el }, function () {
+            utils.get("POST", "Save", service, permission,
             function (data) {
                 // success
                 if (data.Success) {
                     viewmodel.permissionId(data.Permission.PermissionId);
-                }else{
+                } else {
                     alert.danger({
                         selector: roleId() !== null ? roleEl : userEl,
                         text: resx.ErrorSavePermission
@@ -416,20 +404,15 @@ intelequiaSecure.PermissionViewModel = function (moduleId, resx, editvm) {
                     status: error.status,
                     redirect: error.status === 401
                 });
-            },
-            function () {
-                // always
-                //isLoading(false);
             });
+        });
 
         return true;
     };
 
     var deletePermission = function (viewmodel) {
         service.controller = "Permission";
-
-        //isLoading(true);
-        alert.dismiss({ selector: "[class*='-permissions']" });
+        var el = "[class*='-permissions']";
 
         var permission = {
             PermissionId: viewmodel.permissionId(),
@@ -442,7 +425,8 @@ intelequiaSecure.PermissionViewModel = function (moduleId, resx, editvm) {
             WritePermission: viewmodel.writePermission()
         };
 
-        utils.get("POST", "Delete", service, permission,
+        alert.dismiss({ selector: el }, function () {
+            utils.get("POST", "Delete", service, permission,
             function (data) {
                 // success
 
@@ -463,11 +447,8 @@ intelequiaSecure.PermissionViewModel = function (moduleId, resx, editvm) {
                     status: error.status,
                     redirect: error.status === 401
                 });
-            },
-            function () {
-                // always
-                //isLoading(false);
             });
+        });
     };
 
     var load = function (data) {

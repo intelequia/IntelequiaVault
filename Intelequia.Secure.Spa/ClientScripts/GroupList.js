@@ -26,40 +26,42 @@ intelequiaSecure.GroupListViewModel = function (moduleId, resx) {
 
     var getGroupList = function () {
         var el = "[id*='iss_IntelequiaSecure_Groups']";
-        isLoading(true);
-        alert.dismiss({
-            selector: el
-        });
-
+        var icon = $(el).find(".heading .fa-list");
+        
         var params = {
             SortField: sortField(),
             SortOrder: sortOrder(),
             Tags: searchTags()
         };
 
-        utils.get("GET", "GetGroups", service, params,
-            function (data) {
-                // success
-                if (data.Success) {
-                    load(data);
-                }
-                else {
-                    // No data to load 
-                    groupList.removeAll();
-                }
-            },
-            function (error, exception) {
-                // fail
-                alert.danger({
-                    selector: el,
-                    text: error.responseText,
-                    status: error.status
+        alert.dismiss({ selector: el }, function () {
+
+            utils.loading(icon, "fa-list");
+
+            utils.get("GET", "GetGroups", service, params,
+                function (data) {
+                    // success
+                    if (data.Success) {
+                        load(data);
+                    }
+                    else {
+                        // No data to load 
+                        groupList.removeAll();
+                    }
+                },
+                function (error, exception) {
+                    // fail
+                    alert.danger({
+                        selector: el,
+                        text: error.responseText,
+                        status: error.status
+                    });
+                },
+                function () {
+                    // always
+                    utils.loading(icon, "fa-list");
                 });
-            },
-            function () {
-                // always
-                isLoading(false);
-            });
+        });
     };
 
     var swapOrder = function () {
@@ -132,7 +134,6 @@ intelequiaSecure.GroupListViewModel = function (moduleId, resx) {
 intelequiaSecure.GroupViewModel = function (moduleId, resx) {
     var utils = new common.Utils();
     var alert = new common.Alert();
-    
     var resourceGroupId = ko.observable("");
     var resourceName = ko.observable("");
     var portalId = ko.observable("");
@@ -179,52 +180,58 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx) {
         var icon = $(target.currentTarget).find(".fa-book");
         var el = "#pnlGroup_" + group.resourceGroupId();
 
-        utils.loading(icon, "fa-book");
         selectedResources.removeAll();
 
-        alert.dismiss({ selector: el }, function () {
         var params = {
             ResourceGroupId: resourceGroupId()
         };
 
-        if (typeof ($(el).attr("aria-expanded")) === "undefined" || $(el).attr("aria-expanded") === "false") {
-            utils.get("GET", "GetResources", service, params,
-                function (data) {
-                    // success
-                    if (data.Success && data.Resources.length > 0) {
-                        resourceList.removeAll();
-                        $.each(data.Resources,
-                            function (index, resource) {
-                                var resc = new intelequiaSecure.ResourceViewModel(moduleId);
-                                resc.load(resource);
-                                resourceList.push(resc);
-                            });
-                    }
-                    else {
-                        // No data to load 
-                        resourceList.removeAll();
-                    }
-                },
-                function (error, exception) {
-                    // fail
-                    alert.danger({
-                        selector: el,
-                        text: JSON.parse(error.responseText).Message,
-                        status: error.status
-                    });
-                },
-                function () {
-                    // always
+        alert.dismiss({ selector: el }, function () {
+
+            utils.loading(icon, "fa-book");
+
+            if (typeof ($(el).attr("aria-expanded")) === "undefined" || $(el).attr("aria-expanded") === "false") {
+                utils.get("GET", "GetResources", service, params,
+                    function (data) {
+                        // success
+                        if (data.Success && data.Resources.length > 0) {
+                            resourceList.removeAll();
+                            $.each(data.Resources,
+                                function (index, resource) {
+                                    var resc = new intelequiaSecure.ResourceViewModel(moduleId);
+                                    resc.load(resource);
+                                    resourceList.push(resc);
+                                });
+                        }
+                        else {
+                            // No data to load 
+                            resourceList.removeAll();
+                        }
+                    },
+                    function (error, exception) {
+                        // fail
+                        alert.danger({
+                            selector: el,
+                            text: JSON.parse(error.responseText).Message,
+                            status: error.status
+                        });
+                    },
+                    function () {
+                        // always
                         utils.loading(icon, "fa-book");
-                });
-        }
+                    });
+            }
         });
-        
     };
 
     var sendMail = function (group) {
         service.controller = "Message";
         var el = $("#pnlGroup_" + group.resourceGroupId()).find(".group-body");
+
+        var params = {
+            ResourceGroupId: resourceGroupId(),
+            ResourcesIds: selectedResources()
+        };
 
         alert.dismiss({ selector: el }, function () {
 
@@ -232,11 +239,6 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx) {
                 alert.danger({ selector: el, text: resx.ErrorSelectMessage, redirect: false });
                 return false;
             }
-
-            var params = {
-                ResourceGroupId: resourceGroupId(),
-                ResourcesIds: selectedResources()
-            };
 
             utils.get("POST", "Create", service, params,
                 function (data) {
@@ -254,10 +256,6 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx) {
                         text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
                         status: error.status
                     });
-                },
-                function () {
-                    // always
-                    isLoading(false);
                 });
         });
 
@@ -290,7 +288,6 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx) {
 intelequiaSecure.ResourceViewModel = function (moduleId) {
     var utils = new common.Utils();
     var alert = new common.Alert();
-
     var resourceId = ko.observable("");
     var resourceKey = ko.observable("");
     var resourceValue = ko.observable("");
@@ -332,48 +329,49 @@ intelequiaSecure.ResourceViewModel = function (moduleId) {
         var el = "#resource_" + resourceId();
         var icon = $(el).find(".fa-key");
 
-        utils.loading(icon, "fa-key");
-
-        alert.dismiss({ selector: el }, function () {
         var params = {
             resourceId: resourceId,
             resourceGroupId: resourceGroupId
         };
 
-        $(el).find(".resource-value").animate(
-            {
-                opacity: 0
-            },
-            function () {
-                utils.get("GET", "GetResource", service, params,
-                    function (data) {
-                        // success
-                        if (data.Success && data.Resource) {
-                            isResourceVisible(true);
-                            load(data.Resource);
-                            resourceEncriptedValue(data.ResourceEncriptedValue);
-                            resourceValueCss("resource-value");
+        alert.dismiss({ selector: el }, function () {
 
-                            timeout = setTimeout(function () {
-                                hideResource();
-                            }, 30000);
-                        }
-                    },
-                    function (error, exception) {
-                        // fail
-                        alert.danger({
-                            selector: el,
-                            text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                            status: error.status,
-                            redirect: false
+            utils.loading(icon, "fa-key");
+
+            $(el).find(".resource-value").animate(
+                {
+                    opacity: 0
+                },
+                function () {
+                    utils.get("GET", "GetResource", service, params,
+                        function (data) {
+                            // success
+                            if (data.Success && data.Resource) {
+                                isResourceVisible(true);
+                                load(data.Resource);
+                                resourceEncriptedValue(data.ResourceEncriptedValue);
+                                resourceValueCss("resource-value");
+
+                                timeout = setTimeout(function () {
+                                    hideResource();
+                                }, 30000);
+                            }
+                        },
+                        function (error, exception) {
+                            // fail
+                            alert.danger({
+                                selector: el,
+                                text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                                status: error.status,
+                                redirect: false
+                            });
+                        },
+                        function () {
+                            // always
+                            $(el).find(".resource-value").animate({ opacity: 1 }, 1000);
+                                utils.loading(icon, "fa-key");
+                            });
                         });
-                    },
-                    function () {
-                        // always
-                        $(el).find(".resource-value").animate({ opacity: 1 }, 1000);
-                            utils.loading(icon, "fa-key");
-                        });
-                    });
             });
     };
 

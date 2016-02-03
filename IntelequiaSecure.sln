@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{896C88E1-52FF-473C-AE5A-1B4EDCD7BA4F}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,17 +30,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://intelequia.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Intelequia.Secure.Spa\\Intelequia.Secure.Spa.csproj
-		SccProjectName1 = Intelequia.Secure.Spa
-		SccLocalPath1 = Intelequia.Secure.Spa
-		SccProjectUniqueName2 = Intelequia.Secure.Api\\Intelequia.Secure.Data.csproj
-		SccProjectName2 = Intelequia.Secure.Api
-		SccLocalPath2 = Intelequia.Secure.Api
 	EndGlobalSection
 EndGlobal
