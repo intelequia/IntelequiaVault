@@ -138,6 +138,9 @@
   <data name="ConfirmeDeleteMessage.Text" xml:space="preserve">
     <value>Are you sure you want to cancel the message?</value>
   </data>
+  <data name="DateError.Text" xml:space="preserve">
+    <value>Please enter a valid date.</value>
+  </data>
   <data name="Discard.Text" xml:space="preserve">
     <value>Discard</value>
   </data>

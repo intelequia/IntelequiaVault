@@ -1,35 +1,40 @@
 ﻿@charset "UTF-8";
 
-// PEX SKIN
-//============/
-// Aquí se definen todos los módulos que se van a compilar en 
-// el CSS definitivo del skin. (../css/skin.css)
-// Para habilitar/deshabilitar módulos ir a "lib/settings.scss"
-
-// BOOTSTRAP
-//=============/
-// Cambiar el min-height del Grid-System a 0px (default: 1px)
+// INTELEQUIA VAULT STYLES
+//===========================/
+// To enable/disable style modules go to "lib/settings.scss"
 
 
-// Librerías
-//=============/
+
+
+// Lib
+//=======/
 @import "lib/settings.scss";
 @import "lib/mixins.scss";
 @import "lib/functions.scss";
 @import "lib/placeholders.scss";
 
+
+
+
 // Presets
 //===========/
 @import "presets/links.scss";
 
-// Componentes
+
+
+
+// Components
 //===============/
-@import "components/accordion.scss"; // opcional
-@import "components/alerts.scss"; // opcional
-@import "components/buttons.scss"; // opcional
-@import "components/forms.scss"; // opcional
+@import "components/accordion.scss"; // optional
+@import "components/alerts.scss"; // optional
+@import "components/buttons.scss"; // optional
+@import "components/forms.scss"; // optional
 @import "components/typography.scss";
-@import "components/animations.scss"; // opcional
+@import "components/animations.scss"; // optional
+
+
+
 
 // Layout
 //==========/

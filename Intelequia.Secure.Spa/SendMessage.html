@@ -100,6 +100,9 @@
                                     <em class="fa fa-calendar-o"></em>
                                 </span>
                             </div>
+                            <div data-bind="validationMessage: date" class="text-alert text-danger" style="display: none;">
+                                <span data-bind="validationMessage: date"></span>
+                            </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="input-group">
@@ -152,7 +155,8 @@
             ConfirmCancelMessage: "[Resx:{key:'ConfirmCancelMessage'}]",
             Yes: "[Resx:{key:'Yes'}]",
             No: "[Resx:{key:'No'}]",
-            MessageNotCancel: "[Resx:{key: 'MessageNotCancel.Text'}]"
+            MessageNotCancel: "[Resx:{key: 'MessageNotCancel.Text'}]",
+            DateError: "[Resx:{key: 'DateError.Text'}]"
         };
 
         var editorOptions = {

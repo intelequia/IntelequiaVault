@@ -1,9 +1,9 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 //FUNCTIONS
 //============/
 
-// Función para mantener el tamaño de fuente consistente
+// Keep consistent font size
 // .selector { font-size: fs(x-small); }
 @function fs($font-size) {
   @return map-get($fontsize-vars, $font-size) * 1em;
