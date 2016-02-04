@@ -272,6 +272,11 @@ div[id*="IntelequiaSecure"].container-fluid {
 				@include user-select(none);
 				max-height: 200px;
 			}
+
+			img {
+				max-width: 350px;
+				height: auto;
+			}
 		}
 
 		.selected-resource {

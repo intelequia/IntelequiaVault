@@ -165,6 +165,9 @@
   <data name="SecretRequired.Text" xml:space="preserve">
     <value>You must enter the secret</value>
   </data>
+  <data name="ValueRequired.Text" xml:space="preserve">
+    <value>You must enter a value</value>
+  </data>
   <data name="Yes.Text" xml:space="preserve">
     <value>Yes</value>
   </data>

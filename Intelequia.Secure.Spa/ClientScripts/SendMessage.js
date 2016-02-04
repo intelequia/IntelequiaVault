@@ -29,7 +29,6 @@ intelequiaSecure.SendMessageViewModel = function (moduleId, resx) {
     var cancelMessageVisible = ko.observable(false);
     var actionsVisible = ko.observable(true);
     var isSending = ko.observable(false);
-
     var expireDate = ko.computed(function () {
         if (hour() === "")
             return date() + " 00:00";

@@ -130,8 +130,7 @@ common.Alert = function () {
         var alertPanel = $(alert.selector).find(".alert-panel");
 
         $.each(alertPanel, function (index, el) {
-
-            $(el).slideUp(800, function () {
+            $(el).slideUp(400, function () {
                 $(el).remove();
 
                 if (typeof (callback) === "function") {

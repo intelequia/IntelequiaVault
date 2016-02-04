@@ -14,10 +14,8 @@ intelequiaSecure.Message = function (data) {
 
 intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
     var resourceGroupId = ko.observable("");
-
     var utils = new common.Utils();
     var alert = new common.Alert();
-
     var messageId = ko.observable("");
     var messageFrom = ko.observable("");
     var messageTo = ko.observable("").extend({ required: { message: resx.RequiredMessageTo, params: true } }).extend({ multiemail: { params: true, message: resx.EmailsNotValid } });
@@ -29,15 +27,10 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
     var body = ko.observable("");
     var date = ko.observable("").extend({ required: { message: resx.RequiredDate, params: true } });
     var hour = ko.observable("").extend({ required: { message: resx.RequiredDate, params: true } });
-
     var expireDateString = ko.observable("");
-    
     var hasMessage = ko.observable(false);
-
     var cancelMessageVisible = ko.observable(false);
-
     var actionsVisible = ko.observable(true);
-
     var expireDate = ko.computed(function () {
         if (hour() === "")
             return date() + " 00:00";
@@ -52,11 +45,11 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
     var refreshMessage = function (resourceGroupId, messageId) {
         var el = "#iss_IntelequiaSecure_ViewMessage_" + moduleId;
         
-        alert.dismiss({ selector: el }, function () {
-            var params = {
-                messageId: messageId
-            };
+        var params = {
+            messageId: messageId
+        };
 
+        alert.dismiss({ selector: el }, function () {
             utils.get("GET", "GetEncryptMessage", service, params,
                 function (data) {
                     if (data.Success && data.Message) {
@@ -68,9 +61,6 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
                 },
                 function (error, exception) {
                     alert.danger({ selector: el, text: error.responseText, status: error.status });
-                },
-                function () {
-                    isLoading(false);
                 });
         });
     };

@@ -43,7 +43,6 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>[Resx:{key:'Secret'}]:</label>
-                <!--<textarea class="form-control required" rows="8" data-bind="value: resourceValue, validationElement: resourceValue" placeholder="[Resx:{key:'ResourceValue'}]"></textarea>-->
                 <div class="editor-wrapper">
                     <div id="ResourceValueEditor"></div>
                     <div data-bind="validationMessage: resourceValue" class="text-alert text-danger" style="display: none;">
@@ -68,8 +67,7 @@
         </a>
     </div>
 
-    <!-- ko if: deleteResourceVisible -->
-    <div class="delete-resource">
+    <div class="delete-resource" style="display:none;" data-bind="visible: deleteResourceVisible()">
         <div class="alert alert-warning text-left">
             <p>[Resx:{key:"ConfirmDeteleEntry"}]</p>
             <br />
@@ -79,7 +77,6 @@
             </div>
         </div>
     </div>
-    <!-- /ko -->
 </div>
     <script language="javascript" type="text/javascript">
         jQuery(function ($) {
@@ -87,6 +84,7 @@
 
             var localizedSettings = {
                 RequiredResourceKey: "[Resx:{key:'KeyRequired'}]",
+                RequiredResourceValue: "[Resx:{key:'ValueRequired'}]",
                 ResourceSaved: "[Resx:{key:'EntrySaved'}]",
                 ResourceNotSaved: "[Resx:{key:'EntryNotSaved'}]"
             };

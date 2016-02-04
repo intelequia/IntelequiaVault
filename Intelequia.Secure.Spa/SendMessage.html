@@ -53,6 +53,9 @@
             <div class="form-group">
                 <label>[Resx:{key:"Subject"}]</label>
                 <input type="text" class="form-control required" placeholder="[Resx:{key:'Subject.Help'}]" data-bind="value: subject, validationElement: subject" />
+                <div data-bind="validationMessage: subject" class="text-alert text-danger" style="display: none;">
+                    <span data-bind="validationMessage: subject"></span>
+                </div>
             </div>
         </div>
     </div>
@@ -123,7 +126,7 @@
                 <em class="fa fa-paper-plane"></em> [Resx:{key:"Send"}]
             </a>
             <a href="#" class="btn btn-icon btn-secondary" data-bind="click: deleteMessageConfirm">
-                <em class="fa fa-arrow-left"></em>[Resx:{key:"Discard"}]
+                <em class="fa fa-times"></em>[Resx:{key:"Discard"}]
             </a>
         </div>
     </div>

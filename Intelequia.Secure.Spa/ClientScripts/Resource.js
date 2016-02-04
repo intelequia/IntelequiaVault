@@ -8,7 +8,7 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
     var resourceId = ko.observable("");
     var resourceGroupName = ko.observable("");
     var resourceKey = ko.observable("").extend({ required: { message: resx.RequiredResourceKey, params: true }, pattern: { message: resx.RequiredResourceKey, params: "^[^<>%=\"!¡¿?·()$]*$" } });
-    var resourceValue = ko.observable("").extend({ required: { message: resx.RequiredResourceKey, params: true } });
+    var resourceValue = ko.observable("").extend({ required: { message: resx.RequiredResourceValue, params: true } });
     var postBackUrl = ko.observable("");
     var deleteResourceVisible = ko.observable(false);
     var service = {
@@ -66,17 +66,12 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
                     status: error.status,
                     redirect: error.status === 401
                 });
-            },
-            function () {
-                // always
-                isLoading(false);
             });
     };
 
     var saveResource = function () {
         service.controller = "Resource";
         var el = ".editor-wrapper";
-        alert.dismiss({ selector: el });
 
         resourceValue($('#ResourceValueEditor').trumbowyg('html'));
 
@@ -93,41 +88,37 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
             ResourceValue: resourceValue()
         }
 
-        if (errors().length === 000) {
-
-            utils.get("POST", "Save", service, resource,
-            function (data) {
-                // success
-                if (data.Success) {
-                    load(data.Resource);
-                    alert.success({
-                        selector: el,
-                        text: resx.ResourceSaved
-                    });
-                } else {
+        alert.dismiss({ selector: el }, function () {
+            if (errors().length === 000) {
+                utils.get("POST", "Save", service, resource,
+                function (data) {
+                    // success
+                    if (data.Success) {
+                        load(data.Resource);
+                        alert.success({
+                            selector: el,
+                            text: resx.ResourceSaved
+                        });
+                    } else {
+                        alert.danger({
+                            selector: el,
+                            text: resx.ResourceNotSaved
+                        });
+                    }
+                },
+                function (error, exception) {
+                    // fail
                     alert.danger({
                         selector: el,
-                        text: resx.ResourceNotSaved
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                        status: error.status,
+                        redirect: error.status === 401
                     });
-                }
-            },
-            function (error, exception) {
-                // fail
-                alert.danger({
-                    selector: el,
-                    text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
-                    redirect: error.status === 401
                 });
-            },
-            function () {
-                // always
-                isLoading(false);
-            });
-
-        } else {
-            errors.showAllMessages(true);
-        }
+            } else {
+                errors.showAllMessages(true);
+            }
+        });
     };
 
     var deleteResourceConfirm = function () {
@@ -150,7 +141,8 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
             ResourceValue: resourceValue()
         }
 
-        utils.get("POST", "Delete", service, resource,
+        alert.dismiss({ selector: el }, function () {
+            utils.get("POST", "Delete", service, resource,
             function (data) {
                 // success
                 if (data.Success) {
@@ -165,11 +157,8 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
                     status: error.status,
                     redirect: error.status === 401
                 });
-            },
-            function () {
-                // always
-                isLoading(false);
             });
+        });
     };
 
     return {

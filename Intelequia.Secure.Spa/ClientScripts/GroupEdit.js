@@ -135,32 +135,30 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
             resourceGroupId: group().resourceGroupId()
         };
 
-        if (errors().length === 0) {
-            utils.get("GET", "CheckUser", service, params,
-            function (data) {
-                // success
-                if (data.Success) {
-                    userFound(true);
-                } else {
-                    userFound(false);
-                }
-            },
-            function (error, exception) {
-                // fail
-                alert.danger({
-                    selector: el,
-                    text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
-                    redirect: error.status === 401
+        alert.dismiss({ selector: el }, function () {
+            if (errors().length === 0) {
+                utils.get("GET", "CheckUser", service, params,
+                function (data) {
+                    // success
+                    if (data.Success) {
+                        userFound(true);
+                    } else {
+                        userFound(false);
+                    }
+                },
+                function (error, exception) {
+                    // fail
+                    alert.danger({
+                        selector: el,
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                        status: error.status,
+                        redirect: error.status === 401
+                    });
                 });
-            },
-            function () {
-                // always
-                //isLoading(false);
-            });
-        } else {
-            errors.showAllMessages(true);
-        }
+            } else {
+                errors.showAllMessages(true);
+            }
+        });
     };
 
     var addUserCancel = function () {
@@ -294,7 +292,11 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
     };
 
     var deleteResourceGroupConfirm = function () {
-        deleteResourceGroupVisible(true);
+        var el = "#iss_IntelequiaSecure_GroupEdit_" + moduleId;
+
+        alert.dismiss({ selector: el }, function () {
+            deleteResourceGroupVisible(true);
+        });
     };
 
     var deleteResourceGroupCancel = function () {

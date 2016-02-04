@@ -1357,6 +1357,9 @@ div[id*="IntelequiaSecure"].container-fluid {
         -ms-user-select: none;
         user-select: none;
         max-height: 200px; }
+      .groups-panel .group-panel .resource-value img {
+        max-width: 350px;
+        height: auto; }
     .groups-panel .group-panel .selected-resource .resource-heading {
       border: 1px solid #F6C026; }
       .groups-panel .group-panel .selected-resource .resource-heading .resource-icon {
