@@ -131,8 +131,8 @@
     <Content Include="Css\Trumbowyg\trumbowyg.min.css" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="GroupEdit.html" />
-    <Content Include="Img\iconExtension.gif" />
     <Content Include="Css\module.css" />
+    <Content Include="Img\moduleicon.png" />
     <Content Include="Resource.html" />
     <Content Include="ViewMessage.html" />
     <Content Include="SendMessage.html" />

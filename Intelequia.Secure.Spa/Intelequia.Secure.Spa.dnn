@@ -3,7 +3,7 @@
     <package name="Intelequia.Secure.Spa" type="Module" version="01.00.00">
       <friendlyName>Intelequia Vault</friendlyName>
       <description>Intelequia Vault</description>
-      <iconFile>~/DesktopModules/Intelequia/Secure/Img/iconExtension.gif</iconFile>
+      <iconFile>~/DesktopModules/Intelequia/Secure/Img/moduleicon.png</iconFile>
       <owner>
         <name>Intelequia</name>
         <organization>Intelequia Software Solutions</organization>
