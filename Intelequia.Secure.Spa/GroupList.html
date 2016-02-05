@@ -1,6 +1,7 @@
 ﻿[JavaScript:{ jsname: "JQuery" }]
 [JavaScript:{ jsname: "Knockout" }]
 [JavaScript:{ path: "~/Resources/Shared/scripts/dnn.jquery.js"}]
+[JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/knockout.validation.min.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Accordion.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/GroupList.js"}]
 [JavaScript:{ path: "~/DesktopModules/Intelequia/Secure/ClientScripts/Common.js"}]
@@ -46,6 +47,9 @@
                     <a href="#" class="btn btn-secondary" data-bind="click: clean" title="[Resx:{key:'Clean'}]">
                         <em class="fa fa-eraser"></em>
                     </a>
+                </div>
+                <div data-bind="validationMessage: searchTags" class="text-alert text-danger" style="display: none;">
+                    <span data-bind="validationMessage: searchTags"></span>
                 </div>
             </div>
         </div>
@@ -146,7 +150,8 @@
     jQuery(function ($) {
         var moduleId = parseInt("[ModuleContext:ModuleId]");
         var localizedSettings = {
-            ErrorSelectMessage: "[Resx:{key:'ErrorSelectMessage'}]"
+            ErrorSelectMessage: "[Resx:{key:'ErrorSelectMessage'}]",
+            SearchTagsError: "[Resx:{key:'SearchTagsError'}]"
         };
 
         var viewmodel = new intelequiaSecure.GroupListViewModel(moduleId, localizedSettings);

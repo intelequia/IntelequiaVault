@@ -60,7 +60,11 @@ intelequiaSecure.ViewMessageViewModel = function (moduleId, resx) {
                     }
                 },
                 function (error, exception) {
-                    alert.danger({ selector: el, text: error.responseText, status: error.status });
+                    alert.danger({
+                        selector: el,
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                        redirect: error.status === 401
+                    });
                 });
         });
     };

@@ -3,7 +3,8 @@
 intelequiaSecure.GroupListViewModel = function (moduleId, resx) {
     var utils = new common.Utils();
     var alert = new common.Alert();
-    var searchTags = ko.observable("");
+    //var searchTags = ko.observable("");
+    var searchTags = ko.observable("").extend({ pattern: { message: resx.SearchTagsError, params: "^[^<>%=\"!¡¿?·$']*$" } });
     var sortOrder = ko.observable("ASC");
     var sortField = ko.observable("ResourceName");
     var isLoading = ko.observable(false);
@@ -19,6 +20,8 @@ intelequiaSecure.GroupListViewModel = function (moduleId, resx) {
         controller: "Group"
     }
     service.baseUrl = service.framework.getServiceRoot(service.path);
+    // ko.validation
+    ko.validation.init({ insertMessages: false, decorateElement: false });
 
     var init = function () {
         getGroupList();
@@ -53,8 +56,8 @@ intelequiaSecure.GroupListViewModel = function (moduleId, resx) {
                     // fail
                     alert.danger({
                         selector: el,
-                        text: error.responseText,
-                        status: error.status
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                        redirect: error.status === 401
                     });
                 },
                 function () {
@@ -212,8 +215,8 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx) {
                         // fail
                         alert.danger({
                             selector: el,
-                            text: JSON.parse(error.responseText).Message,
-                            status: error.status
+                            text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
+                            redirect: error.status === 401
                         });
                     },
                     function () {
@@ -254,7 +257,7 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx) {
                     alert.danger({
                         selector: el,
                         text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                        status: error.status
+                        redirect: error.status === 401
                     });
                 });
         });
@@ -362,8 +365,7 @@ intelequiaSecure.ResourceViewModel = function (moduleId) {
                             alert.danger({
                                 selector: el,
                                 text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                                status: error.status,
-                                redirect: false
+                                redirect: error.status === 401
                             });
                         },
                         function () {

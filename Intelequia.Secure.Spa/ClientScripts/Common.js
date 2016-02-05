@@ -70,10 +70,10 @@ common.Utils = function () {
 
 common.Alert = function () {
 
-    var success = function (message) {
+    var showAlert = function (cssClass, message) {
         message.redirect = typeof (message.redirect) !== "undefined" ? message.redirect : false;
 
-        $("<div class='alert alert-success alert-panel' style='display:none;'>" + message.text + "</div>")
+        $("<div class='alert "+ cssClass +" alert-panel' style='display:none;'>" + message.text + "</div>")
             .appendTo($(message.selector))
             .slideDown(800, function () {
                 if (message.redirect) {
@@ -82,48 +82,22 @@ common.Alert = function () {
                     }, 3000);
                 }
             });
+    };
+
+    var success = function (message) {
+        showAlert("alert-success", message);
     };
 
     var info = function (message) {
-        message.redirect = typeof (message.redirect) !== "undefined" ? message.redirect : false;
-
-        $("<div class='alert alert-danger alert-panel' style='display:none;'>" + message.text + "</div>")
-            .appendTo($(message.selector))
-            .slideDown(800, function () {
-                if (message.redirect) {
-                    setTimeout(function () {
-                        location.href = typeof (message.postBack) !== "undefined" ? message.postBack : "/";
-                    }, 3000);
-                }
-            });
+        showAlert("alert-info", message);
     };
 
     var warning = function (message) {
-        message.redirect = typeof (message.redirect) !== "undefined" ? message.redirect : false;
-
-        $("<div class='alert alert-warning alert-panel' style='display:none;'>" + message.text + "</div>")
-            .appendTo($(message.selector))
-            .slideDown(800, function () {
-                if (message.redirect) {
-                    setTimeout(function () {
-                        location.href = typeof (message.postBack) !== "undefined" ? message.postBack : "/";
-                    }, 3000);
-                }
-            });
+        showAlert("alert-warning", message);
     };
 
     var danger = function (message) {
-        message.redirect = typeof (message.redirect) !== "undefined" ? message.redirect : false;
-
-        $("<div class='alert alert-danger alert-panel' style='display:none;'>" + message.text + "</div>")
-            .prependTo($(message.selector))
-            .slideDown(800, function () {
-                if (message.redirect) {
-                    setTimeout(function () {
-                        location.href = typeof (message.postBack) !== "undefined" ? message.postBack : "/";
-                    }, 3000);
-                }
-            });
+        showAlert("alert-danger", message);
     };
 
     var dismiss = function (alert, callback) {

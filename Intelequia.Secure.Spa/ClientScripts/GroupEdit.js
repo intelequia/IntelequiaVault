@@ -67,7 +67,6 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
                     alert.danger({
                         selector: el,
                         text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                        status: error.status,
                         redirect: error.status === 401
                     });
                 });
@@ -114,8 +113,7 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
                     // fail
                     alert.danger({
                         selector: el,
-                        text: JSON.parse(error.responseText).Message,
-                        status: error.status,
+                        text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
                         redirect: error.status === 401
                     });
                 });
@@ -151,7 +149,6 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
                     alert.danger({
                         selector: el,
                         text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                        status: error.status,
                         redirect: error.status === 401
                     });
                 });
@@ -207,7 +204,6 @@ intelequiaSecure.EditViewModel = function (moduleId, resx) {
                     alert.danger({
                         selector: el,
                         text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                        status: error.status,
                         redirect: error.status === 401
                     });
                 });
@@ -246,7 +242,7 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
     var alert = new common.Alert();
     var isLoading = ko.observable(false);
     var resourceGroupId = ko.observable("");
-    var resourceName = ko.observable("").extend({ required: { message: resx.RequiredResourceGroupName, params: true }, pattern: { message: resx.RequiredResourceGroupName, params: "^[^<>%=\"!¡¿?·()$]*$" } });
+    var resourceName = ko.observable("").extend({ required: { message: resx.RequiredResourceGroupName, params: true }, pattern: { message: resx.RequiredResourceGroupName, params: "^[^<>%=\"!¡¿?·$']*$" } });
     var deleteResourceGroupVisible = ko.observable(false);
     var service = {
         path: "Intelequia/Secure",
@@ -281,7 +277,6 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
                     alert.danger({
                         selector: el,
                         text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                        status: error.status,
                         redirect: error.status === 401
                     });
                 });
@@ -325,7 +320,6 @@ intelequiaSecure.GroupViewModel = function (moduleId, resx, editvm) {
                 alert.danger({
                     selector: el,
                     text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
                     redirect: error.status === 401
                 });
             });
@@ -403,7 +397,6 @@ intelequiaSecure.PermissionViewModel = function (moduleId, resx, editvm) {
                 alert.danger({
                     selector: roleEl,
                     text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
                     redirect: error.status === 401
                 });
             });
@@ -446,7 +439,6 @@ intelequiaSecure.PermissionViewModel = function (moduleId, resx, editvm) {
                 alert.danger({
                     selector: roleEl,
                     text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
                     redirect: error.status === 401
                 });
             });

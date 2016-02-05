@@ -7,7 +7,7 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
     var resourceGroupId = ko.observable("");
     var resourceId = ko.observable("");
     var resourceGroupName = ko.observable("");
-    var resourceKey = ko.observable("").extend({ required: { message: resx.RequiredResourceKey, params: true }, pattern: { message: resx.RequiredResourceKey, params: "^[^<>%=\"!¡¿?·()$]*$" } });
+    var resourceKey = ko.observable("").extend({ required: { message: resx.RequiredResourceKey, params: true }, pattern: { message: resx.RequiredResourceKey, params: "^[^<>%=\"!¡¿?·$']*$" } });
     var resourceValue = ko.observable("").extend({ required: { message: resx.RequiredResourceValue, params: true } });
     var postBackUrl = ko.observable("");
     var deleteResourceVisible = ko.observable(false);
@@ -63,7 +63,6 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
                 alert.danger({
                     selector: el,
                     text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
                     redirect: error.status === 401
                 });
             });
@@ -111,7 +110,6 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
                     alert.danger({
                         selector: el,
                         text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                        status: error.status,
                         redirect: error.status === 401
                     });
                 });
@@ -154,7 +152,6 @@ intelequiaSecure.ResourceViewModel = function (moduleId, resx) {
                 alert.danger({
                     selector: el,
                     text: error.responseText.indexOf("Message") > -1 ? JSON.parse(error.responseText).Message : error.responseText,
-                    status: error.status,
                     redirect: error.status === 401
                 });
             });

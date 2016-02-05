@@ -180,6 +180,9 @@
   <data name="Search.Text" xml:space="preserve">
     <value>Buscar</value>
   </data>
+  <data name="SearchTagsError.Text" xml:space="preserve">
+    <value>Introduzca un filtro válido</value>
+  </data>
   <data name="SelectToSend.Text" xml:space="preserve">
     <value>Selecciona para enviar</value>
   </data>
